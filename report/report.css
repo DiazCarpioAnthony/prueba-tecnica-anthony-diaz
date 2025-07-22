@@ -112,6 +112,11 @@ body {
   background: #f3f4f6;
   color: #888;
 }
+
+.add-user-btn:hover {
+  background: #eaf6fd !important;
+   color: #0d6efd;
+}
 .save-btn {
   background: #1fa6fa;
   color: #fff;

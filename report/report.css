@@ -1,0 +1,337 @@
+body {
+  background: #f6f8fa;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+.title-report{
+  padding-bottom: 25px;
+  border-bottom: 1px solid #ccc;
+}
+.btn-close{
+  margin-top: 5px;
+}
+.form-row-group{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-row-group div{
+  width: 48%;
+}
+
+.container {
+  background: none;
+  box-shadow: none;
+}
+.bg-light.rounded {
+  border: 1px solid #e9ecef;
+}
+.form-check-input{
+  transform: scale(1.5);
+}
+.form-check-input:checked {
+  background-color: #1976d2;
+  border-color: #1976d2;
+}
+.switch-row .form-check-label {
+  margin-top: 5px;
+  font-weight: 500;
+}
+.form-control, .form-select {
+  border-radius: 8px;
+  font-size: 0.97rem;
+}
+.nav-actions-row {
+  margin-bottom: 2.5rem;
+}
+.inputs-group{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.inputs-group div{
+  width: 48%;
+}
+.report-tabs {
+  border-bottom: none;
+  gap: 10px;
+}
+.report-tabs .nav-link {
+  color: #888;
+  font-weight: 500;
+  font-size: 0.98rem;
+  border: none;
+  background: none;
+  margin: 0;
+  padding-bottom: 8px;
+  position: relative;
+  transition: color 0.2s;
+}
+.report-tabs .nav-link.active {
+  color: #1fa6fa;
+  font-weight: 600;
+  background: none;
+}
+.report-tabs .nav-link.active::after {
+  content: '';
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #1fa6fa;
+  border-radius: 2px;
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+}
+.report-tabs .nav-link:hover:not(.active) {
+  color: #1fa6fa;
+}
+.report-tabs .nav-link:hover:not(.active)::after {
+  content: '';
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #1fa6fa;
+  border-radius: 2px;
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+}
+.cancel-btn {
+  background: none;
+  border: none;
+  text-decoration: none;
+  color: #888;
+  font-weight: 500;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.cancel-btn:hover {
+  background: #f3f4f6;
+  color: #888;
+}
+.save-btn {
+  background: #1fa6fa;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px 0 rgba(31,166,250,0.08);
+  transition: background 0.2s;
+}
+.save-btn:hover {
+  background: #178ed1;
+  color: #fff !important;
+}
+.empty-users-row {
+  min-height: 48px;
+  margin-bottom: 1.2rem !important;
+  flex-wrap: wrap;
+}
+.empty-users-row .text-muted {
+  font-size: 1rem;
+  color: #b0b0b0 !important;
+  margin-bottom: 0;
+}
+.empty-users-row .btn-outline-primary {
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 0.5rem 1.3rem;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+.form-label{
+  color: #b0b0b0;
+  font-weight: 500;
+}
+
+.form-label span{
+  color: #000;
+  font-weight: 700;
+}
+.form-check.form-switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.form-check-label {
+  color: #b0b0b0;
+  font-size: 1.08rem;
+  font-weight: 500;
+  margin-bottom: 0;
+  margin-right: 45px;
+}
+.option-label{
+  color: #000 !important;
+  font-weight: 300;
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+.form-check-input[type="checkbox"].form-switch {
+  border: none;
+  box-shadow: none;
+  margin-top: 0;
+}
+.form-check-input:focus {
+  box-shadow: none;
+}
+.form-check-input.form-switch:checked {
+  background-color: #1fa6fa;
+  border-color: #1fa6fa;
+}
+.form-check-input.form-switch:after {
+  content: '';
+  display: block;
+  width: 22px;
+  height: 22px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  transition: left 0.2s;
+  box-shadow: none;
+}
+.form-check-input.form-switch:checked:after {
+  left: 22px;
+  background: #fff;
+}
+.form-check-input.form-switch {
+  position: relative;
+}
+.switch-row {
+  min-height: 2.5rem;
+  gap: 18px;
+}
+.switch-row .form-check-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #b0b0b0;
+  margin-bottom: 0;
+  line-height: 1;
+}
+.switch-row .form-check-input.form-switch {
+  width: 56px;
+  height: 32px;
+}
+.switch-row .form-check-input.form-switch:after {
+  width: 28px;
+  height: 28px;
+  left: 2px;
+  top: 2px;
+}
+.switch-row .form-check-input.form-switch:checked:after {
+  left: 26px;
+}
+@media (max-width: 700px) {
+  .inputs-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .inputs-group div {
+    width: 100%;
+    text-align: left;
+  }
+  .inputs-group label,
+  .inputs-group input,
+  .inputs-group select {
+    text-align: left;
+  }
+  .nav-actions-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.2rem;
+    padding: 0 0.5rem;
+  }
+  .report-tabs {
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+    display: flex;
+    padding: 0.5rem 0;
+  }
+  .report-tabs .nav-link {
+    text-align: center;
+    width: auto;
+    min-width: 90px;
+    font-size: 1rem;
+    padding: 0.5rem 0.7rem 0.5rem 0.7rem;
+    margin-bottom: 0;
+    margin-right: 4px;
+    margin-left: 4px;
+    border-radius: 6px;
+  }
+  .nav-actions-row > .d-flex {
+    justify-content: center;
+    margin-top: 16px;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+  .save-btn, .cancel-btn {
+    width: auto;
+    min-width: 120px;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 1.1rem;
+    flex: 1 1 120px;
+  }
+  .row.mb-2, .row.mb-2 > .col-6 {
+    flex-direction: column !important;
+    display: flex !important;
+    gap: 12px;
+    width: 100%;
+    max-width: 100%;
+  }
+  .row.mb-2 > .col-6 {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .row.mb-2 input,
+  .row.mb-2 select {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .d-flex.mb-2.gap-3 {
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100%;
+    max-width: 100%;
+  }
+  .d-flex.mb-2.gap-3 > .col-12 {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    flex: none !important;
+    box-sizing: border-box;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .d-flex.mb-2.gap-3 input,
+  .d-flex.mb-2.gap-3 select {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .empty-users-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    gap: 1rem;
+  }
+  .empty-users-row p,
+  .empty-users-row button {
+    width: auto;
+    text-align: left;
+  }
+} 

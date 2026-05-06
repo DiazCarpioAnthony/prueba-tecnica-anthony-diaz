@@ -13,14 +13,14 @@
         subtitle: "Solo por tiempo limitado",
         cta: "Lo quiero.",
         href: "https://interbank.pe/solicitar/prestamo/efectivo/inicio",
-        bg: "",
+        bg: "https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/2c687690-1367-4e9f-abde-8c5ce21c2d0e.jpg",
       },
       {
         title: "Participa por 20,000 millas.",
         subtitle: "Tienes un Extracash esperando",
         cta: "Pídelo ahora",
         href: "https://interbank.pe/solicitar/tarjeta/extracash/inicio",
-        bg: "",
+        bg: "https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/2c687690-1367-4e9f-abde-8c5ce21c2d0e.jpg",
       },
     ];
    
@@ -57,8 +57,7 @@
         .${UNIQUE_ID} {
           width: 100%;
           box-sizing: border-box;
-          margin: 14px 0 6px 0;
-          border-radius: 14px;
+          margin: 20px 0 26px 0;
           overflow: hidden;
           position: relative;
           box-shadow: 0 6px 18px rgba(0,0,0,.08);
@@ -67,10 +66,12 @@
         .${UNIQUE_ID} * { box-sizing: border-box; }
         .${UNIQUE_ID}__viewport {
           position: relative;
-          width: 100%;
+          width: 90%;
           height: 0;
           padding-bottom: 70%;
           overflow: hidden;
+          border-radius: 14px;
+          margin: auto;
         }
         .${UNIQUE_ID}__track {
           position: absolute;

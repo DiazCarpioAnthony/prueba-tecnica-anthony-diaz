@@ -1,21 +1,11 @@
 (() => {
-    // Interbank mobile menu carousel injection (no libs)
-    // Paste/run in DevTools console (or through Adobe Target custom code).
     const CONFIG = {
-      // Autoplay interval (ms). Example: 2000 / 4000 / 5000
       SLIDE_INTERVAL_MS: 4000,
-      // Replace these with real image URLs if you have them.
-      SLIDE_1_BG:
-        "https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/2c687690-1367-4e9f-abde-8c5ce21c2d0e.jpg",
-      SLIDE_2_BG:
-        "https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/2c687690-1367-4e9f-abde-8c5ce21c2d0e.jpg",
-      // If true, stop autoplay while user is interacting
-      PAUSE_ON_HOVER: true,
     };
    
     const UNIQUE_ID = "ibk-target-mobile-menu-carousel-v1";
-    if (window.__IBK_CAROUSEL_INITED__) return;
-    window.__IBK_CAROUSEL_INITED__ = true;
+    if (window._IBK_CAROUSEL_INITED) return;
+    window._IBK_CAROUSEL_INITED = true;
    
     const SLIDES = [
       {
@@ -23,14 +13,14 @@
         subtitle: "Solo por tiempo limitado",
         cta: "Lo quiero.",
         href: "https://interbank.pe/solicitar/prestamo/efectivo/inicio",
-        bg: CONFIG.SLIDE_1_BG,
+        bg: "",
       },
       {
         title: "Participa por 20,000 millas.",
         subtitle: "Tienes un Extracash esperando",
         cta: "Pídelo ahora",
         href: "https://interbank.pe/solicitar/tarjeta/extracash/inicio",
-        bg: CONFIG.SLIDE_2_BG,
+        bg: "",
       },
     ];
    
@@ -41,7 +31,6 @@
         return null;
       }
     }
-   
     function qsa(root, sel) {
       try {
         return Array.from(root.querySelectorAll(sel));
@@ -49,7 +38,6 @@
         return [];
       }
     }
-   
     function el(tag, attrs) {
       const n = document.createElement(tag);
       if (attrs) {
@@ -62,7 +50,6 @@
       }
       return n;
     }
-   
     function ensureStyles() {
       if (qs(document, `style[data-${UNIQUE_ID}]`)) return;
       const s = el("style", { [`data-${UNIQUE_ID}`]: "1" });
@@ -182,7 +169,7 @@
    
     function buildCarousel() {
       ensureStyles();
-   
+      //crea estructura base. root (contenedor principal), vw (area visible), tracks (donde se mueven los slides), dots (paginacion)
       const root = el("section", { class: UNIQUE_ID, id: UNIQUE_ID, role: "region", "aria-label": "Promociones" });
       const viewport = el("div", { class: `${UNIQUE_ID}__viewport` });
       const track = el("div", { class: `${UNIQUE_ID}__track` });
@@ -231,18 +218,16 @@
       let timer = null;
       let paused = false;
    
-      function render() {
+      function render() { // mueve el carousel
         const x = active * -50;
         track.style.transform = `translate3d(${x}%, 0, 0)`;
         const dotEls = qsa(dots, `.${UNIQUE_ID}__dot`);
         dotEls.forEach((d, i) => d.setAttribute("aria-current", String(i === active)));
       }
-   
       function stop() {
         if (timer) window.clearInterval(timer);
         timer = null;
       }
-   
       function start() {
         stop();
         timer = window.setInterval(() => {
@@ -250,14 +235,14 @@
           setActive((active + 1) % SLIDES.length, false);
         }, Math.max(800, Number(CONFIG.SLIDE_INTERVAL_MS) || 4000));
       }
-   
       function setActive(idx, userInitiated) {
+        // cambia de slide y reinicia el autoplay si el usuario interactua
         active = idx;
         render();
         if (userInitiated) start();
       }
    
-      // Basic touch swipe (mobile-friendly)
+      // Touch swipe mobile
       let touchStartX = 0;
       let touchStartY = 0;
       let touchActive = false;
@@ -288,41 +273,21 @@
         touchActive = false;
       });
    
-      if (CONFIG.PAUSE_ON_HOVER) {
-        root.addEventListener("mouseenter", () => {
-          paused = true;
-        });
-        root.addEventListener("mouseleave", () => {
-          paused = false;
-        });
-        root.addEventListener("focusin", () => {
-          paused = true;
-        });
-        root.addEventListener("focusout", () => {
-          paused = false;
-        });
-      }
+      root.addEventListener("mouseenter", () => {
+        paused = true;
+      });
+      root.addEventListener("mouseleave", () => {
+        paused = false;
+      });
+      root.addEventListener("focusin", () => {
+        paused = true;
+      });
+      root.addEventListener("focusout", () => {
+        paused = false;
+      });  
    
       render();
       start();
-   
-      // Expose a tiny API for debugging/tuning
-      root.__ibkCarousel = {
-        setIntervalMs(ms) {
-          CONFIG.SLIDE_INTERVAL_MS = ms;
-          start();
-        },
-        next() {
-          setActive((active + 1) % SLIDES.length, true);
-        },
-        prev() {
-          setActive((active - 1 + SLIDES.length) % SLIDES.length, true);
-        },
-        destroy() {
-          stop();
-          root.remove();
-        },
-      };
    
       return root;
     }
@@ -331,10 +296,7 @@
   
       if (document.getElementById(UNIQUE_ID)) return true;
   
-      // intento 1 (directo)
       let menuList = document.querySelector(".m-header-menu ul");
-  
-      // intento 2 (fallback simple)
       if (!menuList) {
           menuList = document.querySelector(".o-header_menu ul");
       }
@@ -348,20 +310,13 @@
     }
    
     function startObservers() {
-      // Attempt immediately and then watch DOM changes (menu opening/closing changes DOM)
+      // Inyecta directamente y si observa cambios en el DOM tambien (por si el menu aparece despues)
       injectIfPossible();
    
       const obs = new MutationObserver(() => {
         injectIfPossible();
       });
       obs.observe(document.documentElement, { childList: true, subtree: true });
-   
-      // Also retry for a few seconds in case of late-rendered menu
-      const startedAt = Date.now();
-      const t = window.setInterval(() => {
-        injectIfPossible();
-        if (Date.now() - startedAt > 15000) window.clearInterval(t);
-      }, 500);
     }
    
     startObservers();

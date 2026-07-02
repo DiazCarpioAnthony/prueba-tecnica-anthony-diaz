@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-  var STORAGE_KEY = 'ibk-blog-tc-sticky-closed';
   var DESKTOP_BREAK = 1024;
   var TABLET_MIN = 600;
 
@@ -43,7 +42,7 @@
     '#ibk-blog-tc-sticky .ibk-blog-tc-modal__header{height:200px;background:#05be50;overflow:hidden}' +
     '#ibk-blog-tc-sticky .ibk-blog-tc-modal__header img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}' +
     '#ibk-blog-tc-sticky .ibk-blog-tc-modal__body{padding:24px 20px 28px;text-align:center}' +
-    '#ibk-blog-tc-sticky .ibk-blog-tc-modal__title{color:#008C37;font-size:22px;font-weight:700;line-height:1.25;margin-bottom:12px}' +
+    '#ibk-blog-tc-sticky .ibk-blog-tc-modal__title{color:#008C37;font-size:22px;font-weight:500;line-height:1.25;margin-bottom:12px}' +
     '#ibk-blog-tc-sticky .ibk-blog-tc-modal__text{color:#6B7280;font-size:14px;font-weight:400;line-height:1.4;margin-bottom:20px}' +
     '#ibk-blog-tc-sticky .ibk-blog-tc-modal__cta{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:12px 24px;border:0;border-radius:80px;background:#0039A6;color:#fff;font-family:inherit;font-size:16px;font-weight:500;line-height:1.2;text-decoration:none;cursor:pointer;transition:background-color .2s ease}' +
     '#ibk-blog-tc-sticky .ibk-blog-tc-modal__cta:hover,#ibk-blog-tc-sticky .ibk-blog-tc-modal__cta:focus{color:#fff;text-decoration:none;background:#3361B8}' +
@@ -65,20 +64,6 @@
     (DESKTOP_BREAK - 1) +
     'px){body.ibk-blog-tc-has-banner{padding-bottom:96px}}';
 
-  function isModalClosed() {
-    try {
-      return window.sessionStorage.getItem(STORAGE_KEY) === '1';
-    } catch (e) {
-      return false;
-    }
-  }
-
-  function setModalClosed() {
-    try {
-      window.sessionStorage.setItem(STORAGE_KEY, '1');
-    } catch (e) {}
-  }
-
   function injectCSS() {
     if (document.getElementById('ibk-blog-tc-sticky-styles')) {
       return;
@@ -90,10 +75,6 @@
   }
 
   function buildDesktopHTML() {
-    if (isModalClosed()) {
-      return '';
-    }
-
     return (
       '<div class="ibk-blog-tc-desktop">' +
       '<div class="ibk-blog-tc-modal-wrap" role="complementary" aria-label="Promoción tarjeta de crédito">' +
@@ -152,7 +133,6 @@
     if (closeBtn && desktopWrap) {
       closeBtn.addEventListener('click', function () {
         desktopWrap.remove();
-        setModalClosed();
       });
     }
 

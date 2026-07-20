@@ -843,15 +843,6 @@
                 btnHref: 'https://interbank.pe/'
             },
             {
-                image: 'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/1dc537dd-03b2-4186-9e39-74e7eb558b2d.png',
-                imageAlt: 'Maroon 5',
-                badge: 'Conciertos',
-                title: '15% dscto para Maroon 5',
-                desc: 'Venta exclusiva con Tarjetas Interbank',
-                btnText: 'Lo quiero',
-                btnHref: 'https://interbank.pe/'
-            },
-            {
                 image: 'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/fe3bbf4b-a2de-43a1-9d37-87cf6a7b5523.png',
                 imageAlt: 'Hiraoka',
                 badge: 'Compras',
@@ -932,7 +923,7 @@
         '.adc_section-promotions__header{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}',
         '.adc_section-promotions__subtitle{color:var(--p-green);font-size:14px;font-weight:500;line-height:1.3;margin:0}',
         '.adc_section-promotions__title{color:var(--p-text);font-size:24px;font-weight:500;line-height:1.25;margin:0}',
-        '.adc_section-promotions__carousel{background:#fff;-ms-overflow-style:none;margin:0 -24px 24px 0;overflow-x:auto;padding:4px 24px 8px 0;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}',
+        '.adc_section-promotions__carousel{background:#fff;-ms-overflow-style:none;margin:0 -24px 16px 0;overflow-x:auto;padding:4px 24px 8px 0;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}',
         '.adc_section-promotions__carousel::-webkit-scrollbar{display:none}',
         '.adc_section-promotions__track{background:#fff;display:flex;gap:16px;width:max-content}',
         '.adc_promotion-card{background:#fff;border-radius:16px;border: 1px solid #EEEFF1;box-shadow:0 2px 12px -4px rgba(0,0,0,.07);display:flex;flex:0 0 82%;flex-direction:column;max-width:300px;overflow:hidden;scroll-snap-align:start}',
@@ -944,6 +935,9 @@
         '.adc_promotion-card__desc{color:#494E56;flex:1;font-size:14px;line-height:1.4;margin:0}',
         '.adc_promotion-card__btn{align-self:flex-start;background:#fff;border:2px solid var(--adc-blue);border-radius:999px;color:var(--adc-blue);cursor:pointer;display:inline-block;font-size:13px;font-weight:500;line-height:1;padding:8px 18px;text-decoration:none;transition:var(--transition)}',
         '.adc_promotion-card__btn:hover{background:rgba(0,49,146,.06)}',
+        '.adc_section-promotions__dots{align-items:center;display:flex;gap:8px;justify-content:center;margin:0 0 24px;width:100%}',
+        '.adc_section-promotions__dot{background:#D0D5DD;border:none;border-radius:999px;cursor:pointer;flex-shrink:0;height:8px;padding:0;transition:width .3s ease,background-color .3s ease;width:8px}',
+        '.adc_section-promotions__dot.is-active{background:#181A1D;width:8px}',
         '.adc_section-promotions__actions{display:flex;flex-direction:column;gap:12px;width:100%}',
         '.adc_section-promotions__btn{align-items:center;border-radius:999px;cursor:pointer;display:inline-flex;font-size:16px;font-weight:500;gap:10px;justify-content:center;line-height:1;min-height:52px;padding:14px 24px;text-decoration:none;transition:var(--transition);width:100%}',
         '.adc_section-promotions__btn-icon{display:block;flex-shrink:0;height:15px;object-fit:contain;width:15px}',
@@ -987,13 +981,15 @@
         '.adc_section-promotions__header{align-items:center;margin-bottom:32px;text-align:center}',
         '.adc_section-promotions__subtitle{font-size:14px}',
         '.adc_section-promotions__title{font-size:24px;margin-left:auto;margin-right:auto;max-width:800px}',
-        '.adc_section-promotions__carousel{background:#fff;margin:0 -48px 32px;overflow-x:auto;padding:4px 48px 12px;-ms-overflow-style:none;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}',
+        '.adc_section-promotions__carousel{background:#fff;margin:0 -48px 20px;overflow-x:auto;padding:4px 48px 12px;-ms-overflow-style:none;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}',
         '.adc_section-promotions__carousel::-webkit-scrollbar{display:none}',
         '.adc_section-promotions__track{display:flex;gap:20px;width:max-content}',
         '.adc_promotion-card{border:1px solid #EEEFF1;box-shadow:0 5px 10px 0 #181A1D0A;flex:0 0 230px;max-width:230px;min-width:230px;width:230px;scroll-snap-align:start}',
         '.adc_promotion-card__body{padding:18px}',
         '.adc_promotion-card__title{font-size:15px}',
         '.adc_promotion-card__desc{font-size:13px}',
+        '.adc_section-promotions__dots{margin:0 0 32px}',
+        '.adc_section-promotions__dot.is-active{width:24px}',
         '.adc_section-promotions__actions{align-items:center;margin:0 auto;max-width:none;width:auto}',
         '.adc_section-promotions__btn{min-width:300px;padding:14px 48px;width:auto}',
         '.adc_section-footer{padding:0}',
@@ -1013,7 +1009,7 @@
         '.adc_section-benefits{padding:56px 0}',
         '.adc_section-benefits__container{padding:0 10px}',
         '.adc_section-promotions__container{padding:0 64px}',
-        '.adc_section-promotions__carousel{margin:0 -64px 32px;padding:4px 64px 12px}',
+        '.adc_section-promotions__carousel{margin:0 -64px 20px;padding:4px 64px 12px}',
         '.adc_section-footer__container{padding:0 48px}',
         '.adc_section-footer__inner{padding-left:20%}',
         '.adc_section-footer__content{margin-right:48px;max-width:400px;padding:0 0 60px}',
@@ -1082,6 +1078,7 @@
         '<h2 class="adc_section-promotions__title">' + promotionsConfig.title + '</h2>' +
         '</header>' +
         '<div class="adc_section-promotions__carousel"><div class="adc_section-promotions__track">' + promotionsConfig.cards.map(adcPromotionCard).join('') + '</div></div>' +
+        '<div class="adc_section-promotions__dots" role="tablist" aria-label="Paginación de promociones"></div>' +
         '<div class="adc_section-promotions__actions">' +
         '<a class="adc_section-promotions__btn adc_section-promotions__btn--outline d-none" href="' + promotionsConfig.ctaOutlineHref + '" target="_blank" rel="noopener noreferrer">' + promotionsConfig.ctaOutlineText + '<img class="adc_section-promotions__btn-icon" src="' + promotionsConfig.ctaOutlineIcon + '" alt="" loading="lazy"></a>' +
         '<a class="adc_section-promotions__btn adc_section-promotions__btn--primary" href="' + promotionsConfig.ctaPrimaryHref + '" target="_blank" rel="noopener noreferrer">' + promotionsConfig.ctaPrimaryText + '</a>' +
@@ -1108,6 +1105,120 @@
     var adcRoot = adcContainer.firstElementChild;
     document.body.appendChild(adcRoot);
   
+    /* Promotions carousel dots */
+    (function() {
+        var section = adcRoot.querySelector('.adc_section-promotions');
+        if (!section) return;
+        var carousel = section.querySelector('.adc_section-promotions__carousel');
+        var track = section.querySelector('.adc_section-promotions__track');
+        var dotsWrap = section.querySelector('.adc_section-promotions__dots');
+        if (!carousel || !track || !dotsWrap) return;
+
+        var cards = track.querySelectorAll('.adc_promotion-card');
+        var resizeTimer;
+        var currentIndex = 0;
+
+        function isDesktop() {
+            return window.innerWidth >= DESKTOP_BREAK;
+        }
+
+        function getDotCount() {
+            if (!cards.length) return 0;
+            if (!isDesktop()) return cards.length;
+            var maxScroll = carousel.scrollWidth - carousel.clientWidth;
+            if (maxScroll <= 4) return 1;
+            return Math.max(2, Math.ceil(carousel.scrollWidth / carousel.clientWidth));
+        }
+
+        function getActiveIndex() {
+            var maxScroll = carousel.scrollWidth - carousel.clientWidth;
+            var count = getDotCount();
+            if (count <= 1 || maxScroll <= 4) return 0;
+
+            // Al final del scroll siempre marcar el último dot
+            if (carousel.scrollLeft >= maxScroll - 12) return count - 1;
+
+            if (!isDesktop()) {
+                var scrollLeft = carousel.scrollLeft;
+                var best = 0;
+                var bestDist = Infinity;
+                var i;
+                for (i = 0; i < cards.length && i < count; i++) {
+                    var dist = Math.abs(cards[i].offsetLeft - scrollLeft);
+                    if (dist < bestDist) {
+                        bestDist = dist;
+                        best = i;
+                    }
+                }
+                return best;
+            }
+            var progress = carousel.scrollLeft / maxScroll;
+            return Math.min(count - 1, Math.max(0, Math.round(progress * (count - 1))));
+        }
+
+        function setActiveDot(index) {
+            currentIndex = index;
+            var dots = dotsWrap.querySelectorAll('.adc_section-promotions__dot');
+            dots.forEach(function(dot, i) {
+                var active = i === index;
+                dot.classList.toggle('is-active', active);
+                if (active) dot.setAttribute('aria-current', 'true');
+                else dot.removeAttribute('aria-current');
+            });
+        }
+
+        function scrollToIndex(index) {
+            var count = getDotCount();
+            if (count <= 0) return;
+            index = Math.max(0, Math.min(count - 1, index));
+            var maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+            if (!isDesktop()) {
+                // Último card: ir al máximo scroll (el offsetLeft suele superar maxScroll)
+                if (index >= count - 1) {
+                    carousel.scrollTo({ left: maxScroll, behavior: 'smooth' });
+                    return;
+                }
+                var cardLeft = cards[index] ? cards[index].offsetLeft : 0;
+                carousel.scrollTo({ left: Math.min(cardLeft, maxScroll), behavior: 'smooth' });
+                return;
+            }
+            var left = count === 1 ? 0 : (index / (count - 1)) * maxScroll;
+            carousel.scrollTo({ left: left, behavior: 'smooth' });
+        }
+
+        function renderDots() {
+            var count = getDotCount();
+            var html = '';
+            var i;
+            for (i = 0; i < count; i++) {
+                html += '<button type="button" class="adc_section-promotions__dot' + (i === 0 ? ' is-active' : '') + '" aria-label="Página ' + (i + 1) + '"' + (i === 0 ? ' aria-current="true"' : '') + '></button>';
+            }
+            dotsWrap.innerHTML = html;
+            dotsWrap.querySelectorAll('.adc_section-promotions__dot').forEach(function(dot, i) {
+                dot.addEventListener('click', function() {
+                    scrollToIndex(i);
+                    setActiveDot(i);
+                });
+            });
+            setActiveDot(Math.min(currentIndex, Math.max(0, count - 1)));
+        }
+
+        carousel.addEventListener('scroll', function() {
+            setActiveDot(getActiveIndex());
+        }, { passive: true });
+
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                renderDots();
+                setActiveDot(getActiveIndex());
+            }, 150);
+        });
+
+        renderDots();
+    })();
+
     /* Ancla del divider → sección flexibles (cards) */
     var dividerBtn = wrapper.querySelector('#joh-divider-anchor');
     if (dividerBtn) {

@@ -42,11 +42,19 @@
     cardHeight: 284,
     brushSize: 42,
     fadeDuration: 650,
-    autoOpen: true,
-    ctaText: 'Entendido'
+    autoOpen: false,
+    ctaText: 'Entendido',
+    // Texto del botón bajo el cual va el banner (ej: "Ver constancia")
+    anchorButtonText: 'Quiero ser cliente',
+    anchorSelector: '.adc_section-promotions__btn',
+    bannerTitle: '¡Raspa y descubre cuál es tu premio!',
+    bannerCtaText: 'Empezar',
+    bannerIcon:
+      'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/1e180b50-f1c6-4bb1-9f75-cb309d0795bf.png'
   };
 
   var ROOT_ID = 'abRaspaYGana';
+  var BANNER_ID = 'abRaspaYGana-banner';
   var STYLE_ID = 'abRaspaYGana-styles';
   var CONFETTI_BASE = 'https://interbank.pe/o/public-zone-dxp-theme';
   var CONFETTI_STYLE_ID = 'abRaspa-confetti-styles';
@@ -72,6 +80,37 @@
     if (typeof fn === 'function') {
       fn();
     }
+  }
+
+  // Busca un botón/enlace por su texto
+  function findButtonByText(buttonText) {
+    var target = String(buttonText || '')
+      .replace(/\s+/g, ' ')
+      .replace(/^\s+|\s+$/g, '')
+      .toLowerCase();
+    var nodes = document.querySelectorAll(config.anchorSelector || 'a, button');
+    var match = null;
+    var i;
+    var text;
+
+    if (!target) {
+      return null;
+    }
+
+    for (i = 0; i < nodes.length; i += 1) {
+      text = String(nodes[i].textContent || '')
+        .replace(/\s+/g, ' ')
+        .replace(/^\s+|\s+$/g, '')
+        .toLowerCase();
+      if (text === target || text.indexOf(target) !== -1) {
+        match = nodes[i];
+        if (text === target) {
+          break;
+        }
+      }
+    }
+
+    return match;
   }
 
   // Dibuja una imagen cubriendo el canvas (object-fit: cover)
@@ -147,6 +186,13 @@
       root + ' .ab-raspa-footer__cta{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:12px 24px;border:0;border-radius:80px;background:#0039A6;color:#fff;font-family:inherit;font-size:16px;font-weight:500;line-height:1.2;text-decoration:none;cursor:pointer;transition:background-color .2s ease}',
       root + ' .ab-raspa-footer__cta:hover,' +
       root + ' .ab-raspa-footer__cta:focus{color:#fff;text-decoration:none;background:#3361B8}',
+      '#' + BANNER_ID + '{box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;height:80px;margin:12px 0 0;padding:12px 16px;border-radius:16px;background:#005F1E;font-family:Poppins,sans-serif}',
+      '#' + BANNER_ID + ' *{box-sizing:border-box}',
+      '#' + BANNER_ID + ' .ab-raspa-banner__icon{flex-shrink:0;width:40px;height:40px;object-fit:contain;display:block}',
+      '#' + BANNER_ID + ' .ab-raspa-banner__title{flex:1;min-width:0;color:#fff;font-size:14px;font-weight:500;line-height:1.3}',
+      '#' + BANNER_ID + ' .ab-raspa-banner__cta{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;min-width:70px;height:32px;padding:4px 12px;border:0;border-radius:80px;background:#fff;color:#181A1D;font-family:inherit;font-size:12px;font-weight:500;line-height:1;cursor:pointer}',
+      '#' + BANNER_ID + ' .ab-raspa-banner__cta:hover{background:#f3f4f6}',
+      '@media (min-width:768px){#' + BANNER_ID + '{width:400px;max-width:400px;height:80px;margin-left:auto;margin-right:auto}}',
       '@media (max-height:560px){' +
         root +
         ' .ab-raspa-modal{height:auto}' +
@@ -666,11 +712,63 @@
     });
   }
 
-  function render() {
+  // Inserta el banner debajo del botón y abre el popup con Empezar
+  function mountBanner() {
+    var anchor;
+    var startBtn;
+    var tries = 0;
+
+    function tryMount() {
+      if (document.getElementById(BANNER_ID)) {
+        return;
+      }
+
+      anchor = findButtonByText(config.anchorButtonText);
+      if (!anchor) {
+        tries += 1;
+        if (tries < 20) {
+          setTimeout(tryMount, 500);
+        }
+        return;
+      }
+
+      anchor.insertAdjacentHTML(
+        'afterend',
+        '<div id="' +
+          BANNER_ID +
+          '" class="ab-raspa-banner">' +
+          '<img class="ab-raspa-banner__icon" src="' +
+          config.bannerIcon +
+          '" width="40" height="40" alt="">' +
+          '<p class="ab-raspa-banner__title">' +
+          config.bannerTitle +
+          '</p>' +
+          '<button type="button" class="ab-raspa-banner__cta">' +
+          config.bannerCtaText +
+          '</button>' +
+          '</div>'
+      );
+
+      startBtn = document.querySelector('#' + BANNER_ID + ' .ab-raspa-banner__cta');
+      if (startBtn) {
+        startBtn.addEventListener('click', function (event) {
+          if (event.preventDefault) {
+            event.preventDefault();
+          }
+          ensureModal();
+          openModal();
+        });
+      }
+    }
+
+    tryMount();
+  }
+
+  // Crea el modal (sin abrirlo) una sola vez
+  function ensureModal() {
     var root;
 
     if (document.getElementById(ROOT_ID)) {
-      openModal();
       return;
     }
 
@@ -683,8 +781,14 @@
 
     initScratchCard(root);
     bindEvents(root);
+  }
+
+  function render() {
+    injectCSS();
+    mountBanner();
 
     if (config.autoOpen) {
+      ensureModal();
       openModal();
     }
   }

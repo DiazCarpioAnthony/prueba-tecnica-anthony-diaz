@@ -1,21 +1,30 @@
 (function () {
   'use strict';
+  
+    if (!document.querySelector('link[data-adc-poppins]')) {
+        var poppinsLink = document.createElement('link');
+        poppinsLink.rel = 'stylesheet';
+        poppinsLink.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap';
+        poppinsLink.setAttribute('data-adc-poppins', '1');
+        document.head.appendChild(poppinsLink);
+    }
+
 
   /* ========== Config ========== */
 
   var PRIZES = {
     1: {
-      title: '🎉 ¡Ganaste 1% menos en tu tasa!',
+      title: '¡Ganaste 1% menos en tu tasa! ',
       description:
         'Tu préstamo ahora tiene una reducción de 1% en la TCEA. ¡Disfruta un mejor beneficio!'
     },
     5: {
-      title: '🥳 ¡Ganaste 5% menos en tu tasa!',
+      title: '¡Ganaste 5% menos en tu tasa! ',
       description:
         'Tu préstamo ahora tiene una reducción de 5% en la TCEA. ¡Aprovecha este gran beneficio!'
     },
     10: {
-      title: '🥳 ¡Ganaste 10% menos en tu tasa!',
+      title: '¡Ganaste 10% menos en tu tasa! ',
       description:
         '¡Este sí que es un premio! Disfruta una reducción de 10% en la TCEA de tu préstamo.'
     }
@@ -109,7 +118,7 @@
     var root = '#' + ROOT_ID;
 
     return [
-      ':root{--raspa-overlay:rgba(0,0,0,.55);--raspa-title:#005F1E;--raspa-body:#494E56;--raspa-prize-bg:#B8F000}',
+      ':root{--raspa-overlay:rgba(0,0,0,.55);--raspa-title:#005F1E;--raspa-body:#494E56;--raspa-prize-bg:#A0FF96}',
       root + '{position:fixed;top:0;right:0;bottom:0;left:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--raspa-overlay);font-family:Poppins,sans-serif;opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s ease}',
       root + '.ab-raspa--open{opacity:1;visibility:visible}',
       root + ' *{box-sizing:border-box;margin:0;padding:0}',
@@ -126,13 +135,13 @@
       root + ' .ab-raspa-card__canvas{position:absolute;top:0;left:0;width:100%;height:100%}',
       root + ' .ab-raspa-card__base{display:flex;align-items:flex-end;justify-content:center;background-color:#1a1a1a;overflow:hidden;padding-bottom:20px}',
       root + ' .ab-raspa-card__img{position:absolute;top:0;right:0;bottom:0;left:0;display:block;width:100%;height:100%;object-fit:cover}',
-      root + ' .ab-raspa-card__prize{position:relative;z-index:1;width:266px;height:113px;padding:12px 14px;border-radius:16px;background:var(--raspa-prize-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,.18)}',
-      root + ' .ab-raspa-card__prize-title{color:#17013b;font-size:15px;font-weight:600;line-height:1.2;margin-bottom:4px}',
-      root + ' .ab-raspa-card__prize-desc{color:#17013b;font-size:11px;font-weight:400;line-height:1.3}',
+      root + ' .ab-raspa-card__prize{position:relative;z-index:1;width:266px;padding:12px 14px;border-radius:16px;background:var(--raspa-prize-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,.18)}',
+      root + ' .ab-raspa-card__prize-title{color:#17013b;font-size:18px;font-weight:600;line-height:1.2;margin-bottom:4px}',
+      root + ' .ab-raspa-card__prize-desc{color:#17013b;font-size:12px;font-weight:400;line-height:1.3}',
       root + ' .ab-raspa-card__canvas{cursor:grabbing;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;touch-action:none;transition:opacity .65s ease;z-index:2}',
       root + ' .ab-raspa-confetti{position:absolute;top:0;right:0;bottom:0;left:0;pointer-events:none;z-index:3}',
       root + ' .ab-raspa-confetti .a-confetti-animation{margin:0;width:100%;height:100%}',
-      root + ' .ab-raspa-footer{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 20px 28px;background:#fff;text-align:center}',
+      root + ' .ab-raspa-footer{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 20px;background:#fff;text-align:center}',
       root + ' .ab-raspa-footer__title{color:var(--raspa-title);font-size:20px;font-weight:500;line-height:1.3;margin-bottom:12px}',
       root + ' .ab-raspa-footer__subtitle{color:var(--raspa-body);font-size:16px;font-weight:400;line-height:1.4;margin-bottom:24px;max-width:280px}',
       root + ' .ab-raspa-footer__cta{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:12px 24px;border:0;border-radius:80px;background:#0039A6;color:#fff;font-family:inherit;font-size:16px;font-weight:500;line-height:1.2;text-decoration:none;cursor:pointer;transition:background-color .2s ease}',
@@ -140,9 +149,9 @@
       root + ' .ab-raspa-footer__cta:focus{color:#fff;text-decoration:none;background:#3361B8}',
       '@media (max-height:560px){' +
         root +
-        ' .ab-raspa-modal{height:auto;max-height:calc(100vh - 40px)}' +
+        ' .ab-raspa-modal{height:auto}' +
         root +
-        ' .ab-raspa-card{height:min(284px,42vh);flex-basis:auto}' +
+        ' .ab-raspa-card{flex-basis:auto}' +
         root +
         ' .ab-raspa-footer{padding:16px 20px 20px}' +
         root +

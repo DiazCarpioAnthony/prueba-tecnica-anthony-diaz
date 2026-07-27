@@ -17,6 +17,7 @@
   var IFRAME_URL = 'https://interbank.pe/raspa-y-gana';
   var DEFAULT_DOC_TYPE = 'DNI';
   var DEFAULT_DNI = '77777777';
+  var SHOW_IFRAME = true; // true = visible para debug; false = oculto
   var IFRAME_READY_TIMEOUT_MS = 20000;
   var IFRAME_POLL_MS = 200;
 
@@ -225,7 +226,9 @@
     iframe.src = IFRAME_URL;
     iframe.setAttribute(
       'style',
-      'position:fixed;min-height:450px;width:50%;top:0;left:0;opacity:0;pointer-events:none;border:0;'
+      SHOW_IFRAME
+        ? 'position:fixed;z-index:100000;width:420px;height:560px;bottom:16px;right:16px;opacity:1;pointer-events:auto;border:2px solid #0039A6;border-radius:12px;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.25);'
+        : 'position:fixed;min-height:450px;width:50%;top:0;left:0;opacity:0;pointer-events:none;border:0;'
     );
     document.body.appendChild(iframe);
 

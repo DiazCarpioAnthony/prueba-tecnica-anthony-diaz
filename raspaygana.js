@@ -17,7 +17,6 @@
   var DEFAULT_DOC_TYPE = 'DNI';
   var DEFAULT_DNI = '77777777';
   var SHOW_IFRAME = true; // true = visible para debug; false = oculto
-  // Constantes de iframe (igual que iframeSend.js)
   var READY_TIMEOUT_MS = 20000;
   var POLL_INTERVAL_MS = 200;
   var ALLOW_IFRAME_RELOAD_ONCE = true;
@@ -134,7 +133,33 @@
     return selectedPremio;
   }
 
-  // --- Copiado tal cual de iframeSend.js ---
+  function safeLocalStorageGet(key) {
+    try {
+      return window.localStorage.getItem(key);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function safeLocalStorageSet(key, val) {
+    try {
+      window.localStorage.setItem(key, val);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  // ID persistente por dispositivo si no hay digital_id
+  function getAnonId() {
+    var k = 'ibk_anon_id';
+    var existing = safeLocalStorageGet(k);
+    if (existing) return existing;
+    var id = 'anon_' + Math.random().toString(36).slice(2) + '_' + Date.now();
+    safeLocalStorageSet(k, id);
+    return id;
+  }
+
   function getCookie(name) {
     var cookies = document.cookie.split(';').reduce(function (acc, cookie) {
       var parts = cookie.split('=');
@@ -146,9 +171,15 @@
     return cookies[name];
   }
 
-  // digital_id (igual que Info en iframeSend.js)
-  function getDigitalId() {
-    return getCookie('digital_id') || getCookie('audience.digital_id') || '<NO digital_id>';
+  function resolveDigitalId() {
+    var digital_id =
+      getCookie('digital_id') || getCookie('audience.digital_id') || '<NO digital_id>';
+    var userKey =
+      digital_id && digital_id !== '<NO digital_id>' ? digital_id : getAnonId();
+    return {
+      digital_id: digital_id,
+      userKey: userKey
+    };
   }
 
   function normalizeDni(raw) {
@@ -236,7 +267,6 @@
       }
     }, intervalMs);
   }
-  // --- Fin copia iframeSend.js ---
 
   // Crea el iframe oculto (una sola vez) y cachea el form cuando esté listo
   function ensureIframe() {
@@ -278,27 +308,36 @@
     return iframe;
   }
 
-  // Rellena el form del iframe. Submit comentado: solo console.log por ahora.
+  // Rellena el form del iframe (envío al estilo iframeSend.js). Submit comentado por ahora.
   function enviarPremioIframe(premio) {
     var iframe = ensureIframe();
+    var resolved = resolveDigitalId();
+
+    // digInput: self.digital_id || ""  (NO TOCAR) — igual que iframeSend.js
     var datos = {
-      digital_id: getDigitalId(),
-      premio_id: premio.premio_id,
       tipoDocumento: DEFAULT_DOC_TYPE,
-      nroDocumento: normalizeDni(DEFAULT_DNI)
+      nroDocumento: normalizeDni(DEFAULT_DNI),
+      digInput: resolved.digital_id || '',
+      premInput: premio.premio_id || '',
+      userKey: resolved.userKey
     };
 
-    function fillAndLog(iframeDoc, ctForm) {
+    function enviarDatos(datos, iframeDoc, ctForm) {
+      if (!iframeDoc || !ctForm) {
+        console.log('No se encontró el formulario dentro del iframe.');
+        return false;
+      }
+
+      var btnForm = ctForm.querySelector('.a-button-wrapper button');
       var selectDoc = ctForm.querySelector('#idSelectTypeDoc');
       var numDocForm = ctForm.querySelector('#idNumDocumento');
-      var digitaForm = ctForm.querySelector('#digita');
-      var premForm = ctForm.querySelector('#prem');
+      var digForm = ctForm.querySelector('#digita'); // digital ID
+      var premForm = ctForm.querySelector('#prem'); // Premio
       var tycInput = ctForm.querySelector('#idTYC');
       var comercialInput = ctForm.querySelector('#idComercial');
-      var btnForm = ctForm.querySelector('.a-button-wrapper button');
 
-      if (!numDocForm || !digitaForm || !premForm || !tycInput || !btnForm) {
-        console.log('No se encontraron elementos clave dentro del iframe raspa-y-gana.');
+      if (!btnForm || !numDocForm || !digForm || !premForm || !tycInput) {
+        console.log('No se encontraron elementos clave dentro del iframe.');
         return false;
       }
 
@@ -310,8 +349,8 @@
       }
       numDocForm.value = datos.nroDocumento;
 
-      digitaForm.value = datos.digital_id;
-      premForm.value = datos.premio_id;
+      digForm.value = datos.digInput || ''; // NO TOCAR
+      premForm.value = datos.premInput || '';
       tycInput.checked = true;
       if (comercialInput) {
         comercialInput.checked = true;
@@ -319,10 +358,11 @@
 
       console.log('[raspa-y-gana] Datos listos para enviar al iframe:', {
         url: IFRAME_URL,
-        digital_id: datos.digital_id,
-        premio_id: datos.premio_id,
+        digInput: datos.digInput,
+        premInput: datos.premInput,
         tipoDocumento: datos.tipoDocumento,
         nroDocumento: datos.nroDocumento,
+        userKey: datos.userKey,
         tyc: tycInput.checked
       });
 
@@ -339,7 +379,7 @@
     }
 
     if (cachedIframeDoc && cachedCtForm) {
-      fillAndLog(cachedIframeDoc, cachedCtForm);
+      enviarDatos(datos, cachedIframeDoc, cachedCtForm);
       return;
     }
 
@@ -352,7 +392,7 @@
         }
         cachedIframeDoc = iframeDoc;
         cachedCtForm = ctForm;
-        fillAndLog(iframeDoc, ctForm);
+        enviarDatos(datos, iframeDoc, ctForm);
       },
       {
         timeoutMs: READY_TIMEOUT_MS,

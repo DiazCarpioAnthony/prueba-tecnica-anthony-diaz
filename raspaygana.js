@@ -17,7 +17,6 @@
   var IFRAME_URL = 'https://interbank.pe/raspa-y-gana';
   var DEFAULT_DOC_TYPE = 'DNI';
   var DEFAULT_DNI = '77777777';
-  var SHOW_IFRAME = true; // true = visible para debug; false = oculto
   var IFRAME_READY_TIMEOUT_MS = 20000;
   var IFRAME_POLL_MS = 200;
 
@@ -27,57 +26,71 @@
       premio: 'Premio_TCEA',
       title: '¡Ganaste 10% menos en tu tasa! 🎉',
       description: 'Disfruta una reducción del 10% en la TCEA de tu préstamo.',
-      premio_id: 'premio_TCEA_10'
+      premio_id: 'premio_TCEA_10',
+      image:
+        'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/08365be0-6350-43bd-8d19-ba8f4c61826b.png'
     },
     {
       premio: 'Premio_TCEA',
       title: '¡Ganaste 5% menos en tu tasa! 🎉',
       description: 'Disfruta una reducción del 5% en la TCEA de tu préstamo.',
-      premio_id: 'premio_TCEA_5'
+      premio_id: 'premio_TCEA_5',
+      image:
+        'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/08365be0-6350-43bd-8d19-ba8f4c61826b.png'
     },
     {
       premio: 'Premio_TCEA',
       title: '¡Ganaste 1% menos en tu tasa! 🎉',
       description: 'Disfruta una reducción del 1% en la TCEA de tu préstamo.',
-      premio_id: 'premio_TCEA_1'
+      premio_id: 'premio_TCEA_1',
+      image:
+        'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/08365be0-6350-43bd-8d19-ba8f4c61826b.png'
     },
     {
       premio: 'Premio_CashBack',
       title: '¡Ganaste 10% menos en tu tasa! 🥳',
       description: 'Disfruta una reducción del 10% en la TCEA de tu préstamo.',
-      premio_id: 'premio_cashback'
+      premio_id: 'premio_cashback',
+      image:
+        'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/08365be0-6350-43bd-8d19-ba8f4c61826b.png'
     },
     {
       premio: 'Premio_Millas',
       title: '¡Ganaste 1,000 millas Benefit! 🎉',
       description: 'Tus próximas aventuras empiezan aquí. Las millas ya son tuyas.',
-      premio_id: 'premio_millas'
+      premio_id: 'premio_millas',
+      image:
+        'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/533501ef-ab7f-400a-b6e3-1b9ee6ac1081.png'
     },
     {
       premio: 'Premio_Shopstar',
       title: '¡Ganaste un vale Shopstar! 🎉',
       description: 'Es momento de darte un gusto. Disfruta tu vale en Shopstar.',
-      premio_id: 'premio_shopstar_1'
+      premio_id: 'premio_shopstar_1',
+      image:
+        'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/7be60d72-4005-402f-acd1-017113efc123.png'
     },
     {
       premio: 'Premio_Shopstar2',
       title: '¡Ganaste un vale Shopstar! 🎉',
       description: 'Es momento de darte un gusto. Disfruta tu vale en Shopstar.',
-      premio_id: 'premio_shopstar_2'
+      premio_id: 'premio_shopstar_2',
+      image:
+        'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/10170829-3239-4be0-8196-f82e56166d77.png'
     },
     {
       premio: 'Premio_Vale',
       title: '¡Ganaste un vale de (*) para disfrutar! 🎉',
       description: 'Date un gusto con un vale para comida y bebida. ¡Buen provecho!',
-      premio_id: 'premio_vale'
+      premio_id: 'premio_vale',
+      image:
+        'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/dbcae7b9-56f6-4c2d-9bc8-f05a393c1cad.png'
     }
   ];
 
   var config = {
-    prizeImage:
-      'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/08f381ab-2338-48ec-8dc4-411cdf1ad871.png',
     coverImage:
-      'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/f3249e5f-980d-4827-9988-2041a98ee115.png',
+      'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/3c889865-a913-4135-a16e-79b1fd3adae6.png',
     prizeAlt: 'Premio',
     revealThreshold: 30,
     cardWidth: 327,
@@ -92,7 +105,7 @@
     bannerTitle: '¡Raspa y descubre cuál es tu premio!',
     bannerCtaText: 'Empezar',
     bannerIcon:
-      'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/1e180b50-f1c6-4bb1-9f75-cb309d0795bf.png'
+      'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/19df4dc6-e46d-4706-9be1-b9c9d5ddb6ac.png'
   };
 
   var ROOT_ID = 'abRaspaYGana';
@@ -212,9 +225,7 @@
     iframe.src = IFRAME_URL;
     iframe.setAttribute(
       'style',
-      SHOW_IFRAME
-        ? 'position:fixed;z-index:100000;width:420px;height:560px;bottom:16px;right:16px;opacity:1;pointer-events:auto;border:2px solid #0039A6;border-radius:12px;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.25);'
-        : 'position:fixed;min-height:450px;width:50%;top:0;left:0;opacity:0;pointer-events:none;border:0;'
+      'position:fixed;min-height:450px;width:50%;top:0;left:0;opacity:0;pointer-events:none;border:0;'
     );
     document.body.appendChild(iframe);
 
@@ -602,7 +613,7 @@
       '<div class="ab-raspa-card">',
       '<div class="ab-raspa-card__base">',
       '<img class="ab-raspa-card__img" src="' +
-        config.prizeImage +
+        prize.image +
         '" alt="' +
         config.prizeAlt +
         '">',

@@ -12,23 +12,59 @@
 
   /* ========== Config ========== */
 
-  var PRIZES = {
-    1: {
-      title: '¡Ganaste 1% menos en tu tasa! ',
-      description:
-        'Tu préstamo ahora tiene una reducción de 1% en la TCEA. ¡Disfruta un mejor beneficio!'
+  var DIGITAL_ID = 'raspa_gana_id';
+
+  // Premios disponibles. premio_id se enviará por iframe más adelante.
+  var PREMIOS = [
+    {
+      premio: 'Premio_TCEA',
+      title: '¡Ganaste 10% menos en tu tasa! 🎉',
+      description: 'Disfruta una reducción del 10% en la TCEA de tu préstamo.',
+      premio_id: 'premio_TCEA_10'
     },
-    5: {
-      title: '¡Ganaste 5% menos en tu tasa! ',
-      description:
-        'Tu préstamo ahora tiene una reducción de 5% en la TCEA. ¡Aprovecha este gran beneficio!'
+    {
+      premio: 'Premio_TCEA',
+      title: '¡Ganaste 5% menos en tu tasa! 🎉',
+      description: 'Disfruta una reducción del 5% en la TCEA de tu préstamo.',
+      premio_id: 'premio_TCEA_5'
     },
-    10: {
-      title: '¡Ganaste 10% menos en tu tasa! ',
-      description:
-        '¡Este sí que es un premio! Disfruta una reducción de 10% en la TCEA de tu préstamo.'
+    {
+      premio: 'Premio_TCEA',
+      title: '¡Ganaste 1% menos en tu tasa! 🎉',
+      description: 'Disfruta una reducción del 1% en la TCEA de tu préstamo.',
+      premio_id: 'premio_TCEA_1'
+    },
+    {
+      premio: 'Premio_CashBack',
+      title: '¡Ganaste 10% menos en tu tasa! 🥳',
+      description: 'Disfruta una reducción del 10% en la TCEA de tu préstamo.',
+      premio_id: 'premio_cashback'
+    },
+    {
+      premio: 'Premio_Millas',
+      title: '¡Ganaste 1,000 millas Benefit! 🎉',
+      description: 'Tus próximas aventuras empiezan aquí. Las millas ya son tuyas.',
+      premio_id: 'premio_millas'
+    },
+    {
+      premio: 'Premio_Shopstar',
+      title: '¡Ganaste un vale Shopstar! 🎉',
+      description: 'Es momento de darte un gusto. Disfruta tu vale en Shopstar.',
+      premio_id: 'premio_shopstar_1'
+    },
+    {
+      premio: 'Premio_Shopstar2',
+      title: '¡Ganaste un vale Shopstar! 🎉',
+      description: 'Es momento de darte un gusto. Disfruta tu vale en Shopstar.',
+      premio_id: 'premio_shopstar_2'
+    },
+    {
+      premio: 'Premio_Vale',
+      title: '¡Ganaste un vale de (*) para disfrutar! 🎉',
+      description: 'Date un gusto con un vale para comida y bebida. ¡Buen provecho!',
+      premio_id: 'premio_vale'
     }
-  };
+  ];
 
   var config = {
     prizeImage:
@@ -36,7 +72,6 @@
     coverImage:
       'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/f3249e5f-980d-4827-9988-2041a98ee115.png',
     prizeAlt: 'Premio',
-    prizePercent: 10,
     revealThreshold: 30,
     cardWidth: 327,
     cardHeight: 284,
@@ -62,12 +97,22 @@
 
   var confettiLoaded = false;
   var confettiPendingShow = false;
+  var selectedPremio = null;
 
   /* ========== Utils ========== */
 
-  // Devuelve el texto del premio según prizePercent
-  function getPrizeCopy() {
-    return PRIZES[config.prizePercent] || PRIZES[10];
+  // Elige un premio al azar (una sola vez por sesión)
+  function getSelectedPremio() {
+    if (!selectedPremio) {
+      selectedPremio = PREMIOS[Math.floor(Math.random() * PREMIOS.length)];
+    }
+    return selectedPremio;
+  }
+
+  // Log de IDs al revelar (luego se enviarán por iframe)
+  function logPremioIds(premio) {
+    console.log('digital_id:', DIGITAL_ID);
+    console.log('premio_id:', premio.premio_id);
   }
 
   // Detecta si el dispositivo soporta touch
@@ -356,7 +401,7 @@
   }
 
   function buildModalHTML() {
-    var prize = getPrizeCopy();
+    var prize = getSelectedPremio();
 
     return [
       '<div class="ab-raspa-modal" role="dialog" aria-modal="true" aria-label="Raspa y gana">',
@@ -524,6 +569,7 @@
       canvas.style.pointerEvents = 'none';
       canvas.style.opacity = '0';
       showConfetti(root);
+      logPremioIds(getSelectedPremio());
 
       setTimeout(function () {
         canvas.style.display = 'none';

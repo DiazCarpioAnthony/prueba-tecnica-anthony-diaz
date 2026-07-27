@@ -151,7 +151,7 @@ width:90%; max-width:370px; border-radius:20px;
 border: 1px solid  #FFFFFF; background:rgba(255,255,255,0.15);
 backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
 margin-top:12px; margin-bottom:44px; display:none; flex-direction:column;
-align-items:center; justify-content:  center; gap:16px; padding:20px 15px;
+align-items:center; justify-content:  center; gap:16px; padding:20px;
 }
 .joh-cta-card.joh-visible { display:flex; }
 .joh-cta-text { color:#fff; font-size:16px; font-weight:500; text-align:center; line-height:1.4; }
@@ -278,7 +278,10 @@ background-color:transparent; border-radius:0;
 display:flex; justify-content:flex-start;
 width:auto; margin-bottom:25px;
 }
-.joh-col-left .joh-promo-img { width:370px; height:287px; border-radius:16px; }
+.joh-col-left .joh-promo-img {
+width:248px; height:287px; border-radius:0;
+object-fit:contain; display:block;
+}
 
 .joh-col-left .joh-cta-card {
 display:flex; width:100%; max-width:none; height:140px; margin:0;
@@ -296,7 +299,7 @@ margin-top: 120px;
 }
 
 /* Card desktop: 320x92, arriba */
-.joh-col-right .joh-card { width:320px; height:92px; margin:0 0 20px 0; }
+.joh-col-right .joh-card { width:320px; height:92px; margin:0 0 20px 20px; }
 .joh-col-right .joh-card:not(.joh-card--visible) { display:none; }
 
 /* Tabs desktop: 383px, debajo */
@@ -387,7 +390,7 @@ z-index: 0;
 <div class="joh-wrapper">
 
 <img class="joh-hero-bg"
-src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/b599635f-44a9-42f8-b127-5cc51f02894b.png"
+src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/9a4c0a4b-2da5-4c9a-8d6d-0e2b2277cdee.png"
 alt="Hero background" />
 
 <div class="joh-hero-content">
@@ -485,7 +488,7 @@ alt="Hero background" />
   </svg>
 </nav>
 <div class="joh-promo-img-wrap joh-visible">
-  <img class="joh-promo-img" src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/6684ac5d-64f5-4191-b4ca-d481a9edc292.png" alt="Promo" />
+  <img class="joh-promo-img" src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/b49ff7ba-64c7-4e78-aef3-0bedaf65849b.png" alt="Promo" />
 </div>
 <div class="joh-cta-card joh-visible">
   <span class="joh-cta-text">Comienza a ser cliente y logra tus sueños</span>
@@ -529,13 +532,13 @@ alt="Hero background" />
 </div>
 <div class="joh-tabs-track">
   <div class="joh-tabs">
-    <button class="joh-tab joh-tab--active" data-bg="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/b599635f-44a9-42f8-b127-5cc51f02894b.png" data-card="viaje" data-icon-white="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/a5d47285-2ef5-42d7-86d6-4b097b0c964b.png" data-icon-black="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/3ad0083b-233f-4446-9d4e-fe594df589e5.png">
+    <button class="joh-tab joh-tab--active" data-bg="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/9a4c0a4b-2da5-4c9a-8d6d-0e2b2277cdee.png" data-card="viaje" data-icon-white="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/a5d47285-2ef5-42d7-86d6-4b097b0c964b.png" data-icon-black="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/3ad0083b-233f-4446-9d4e-fe594df589e5.png">
       <span>Un viaje</span> <img src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/a5d47285-2ef5-42d7-86d6-4b097b0c964b.png" alt="Viaje" />
     </button>
-    <button class="joh-tab" data-bg="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/9ad28054-450f-4275-8ed5-de23d534cecb.png" data-card="hogar" data-icon-white="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/9e513b43-0c4f-4bab-bbbb-79ce8238a092.png" data-icon-black="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/650dd100-dd1b-4cdc-bad6-716673cb3970.png">
+    <button class="joh-tab" data-bg="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/9b5d450a-bbb3-49a9-bd31-f8dc46a20093.png" data-card="hogar" data-icon-white="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/9e513b43-0c4f-4bab-bbbb-79ce8238a092.png" data-icon-black="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/650dd100-dd1b-4cdc-bad6-716673cb3970.png">
       <span>Tu hogar</span> <img src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/9e513b43-0c4f-4bab-bbbb-79ce8238a092.png" alt="Hogar" />
     </button>
-    <button class="joh-tab" data-bg="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/0b3ac820-96ed-4134-9569-5a9a38c55d1d.png" data-card="boda" data-icon-white="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/2226aa18-00d8-4ea9-aaae-9758af5d38bc.png" data-icon-black="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/13ecae72-11e0-49a7-ad5b-e1f1887fbe59.png">
+    <button class="joh-tab" data-bg="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/758255b2-3c00-4d09-97d8-0f33a51f5e37.png" data-card="boda" data-icon-white="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/2226aa18-00d8-4ea9-aaae-9758af5d38bc.png" data-icon-black="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/13ecae72-11e0-49a7-ad5b-e1f1887fbe59.png">
       <span>Tu boda</span> <img src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/2226aa18-00d8-4ea9-aaae-9758af5d38bc.png" alt="Boda" />
     </button>
   </div>
@@ -769,7 +772,7 @@ alt="Hero background" />
       }
       lastBgSrc = window.innerWidth < DESKTOP_BREAK ?
           'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/87310f8d-41a6-4dee-bf1d-145e72af0433.png' :
-          'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/b599635f-44a9-42f8-b127-5cc51f02894b.png';
+          'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/9a4c0a4b-2da5-4c9a-8d6d-0e2b2277cdee.png';
       heroBg.src = lastBgSrc;
   }
 

@@ -73,6 +73,7 @@ padding-top: 20px;
 /* Navbar */
 .joh-navbar {
 width: 90%;
+max-width: 370px;
 height: 48px;
 background-color: #ffffff;
 border-radius: 16px;
@@ -232,7 +233,7 @@ padding:0px 0 40px 0; display:flex; flex-direction:column; align-items:stretch;
 .joh-c-card-title { color:#fff; font-size:20px; font-weight:500; line-height:1.3; }
 .joh-c-card-sub   { color:#fff; font-size:14px; font-weight:500; line-height:1.4; }
 .joh-c-btn-link {width: fit-content;}
-.joh-c-btn { width:159px; height:48px; border-radius:80px; border:none; background-color:#0039A6; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; transition:background-color 0.2s ease; }
+.joh-c-btn { width:159px; height:48px; border-radius:80px; border:none; background-color:#0039A6; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:12px; transition:background-color 0.2s ease; }
 .joh-c-btn:hover,
 a:hover .joh-c-btn { background-color:#3361B8; }
 .joh-c-btn:active,
@@ -1047,7 +1048,7 @@ alt="Hero background" />
       '.adc_section-promotions__dots{margin:0 auto 32px}',
       '.adc_section-promotions__actions{align-items:center;margin:0 auto;max-width:none;width:auto}',
       '.adc_section-promotions__btn{min-width:300px;padding:14px 48px;width:auto}',
-      '.adc_section-footer{background:var(--adc-footer-base);padding:60px 0}',
+      '.adc_section-footer{background: linear-gradient(161deg, #05BE50 0%, #005F1E 100%);padding:60px 0}',
       '.adc_section-footer::after{background:var(--adc-footer-overlay);bottom:0;content:"";display:block;height:91px;left:0;pointer-events:none;position:absolute;right:0;z-index:0}',
       '.adc_section-footer__container{margin:0 auto;max-width:1200px;padding:0 48px}',
       '.adc_section-footer__inner{align-items:center;display:grid;gap:40px;grid-template-columns:1fr 1fr;justify-content:initial;width:100%}',

@@ -12,14 +12,15 @@
 
   /* ========== Config ========== */
 
-  // Valor que va al campo "digital ID" (#digita) del iframe
-  var DIGITAL_ID = 'raspa_gana_id';
+  // Valor que va al campo "digital ID" (#digita) del iframe (se lee de cookies)
   var IFRAME_URL = 'https://interbank.pe/raspa-y-gana';
   var DEFAULT_DOC_TYPE = 'DNI';
   var DEFAULT_DNI = '77777777';
   var SHOW_IFRAME = true; // true = visible para debug; false = oculto
-  var IFRAME_READY_TIMEOUT_MS = 20000;
-  var IFRAME_POLL_MS = 200;
+  // Constantes de iframe (igual que iframeSend.js)
+  var READY_TIMEOUT_MS = 20000;
+  var POLL_INTERVAL_MS = 200;
+  var ALLOW_IFRAME_RELOAD_ONCE = true;
 
   // Premios disponibles. premio_id va al campo "Premio" (#prem) del iframe.
   var PREMIOS = [
@@ -133,86 +134,109 @@
     return selectedPremio;
   }
 
+  // --- Copiado tal cual de iframeSend.js ---
+  function getCookie(name) {
+    var cookies = document.cookie.split(';').reduce(function (acc, cookie) {
+      var parts = cookie.split('=');
+      var k = (parts[0] || '').trim();
+      var v = (parts[1] || '').trim();
+      if (k) acc[k] = v;
+      return acc;
+    }, {});
+    return cookies[name];
+  }
+
+  // digital_id (igual que Info en iframeSend.js)
+  function getDigitalId() {
+    return getCookie('digital_id') || getCookie('audience.digital_id') || '<NO digital_id>';
+  }
+
   function normalizeDni(raw) {
     var dni = (raw == null ? '' : String(raw)).trim().replace(/\D/g, '');
-    if (!dni) {
-      dni = DEFAULT_DNI;
-    }
-    if (dni.length < 8) {
-      dni = ('00000000' + dni).slice(-8);
-    }
-    if (dni.length > 8) {
-      dni = dni.slice(0, 8);
-    }
+    if (!dni) dni = DEFAULT_DNI;
+    if (dni.length < 8) dni = ('00000000' + dni).slice(-8);
+    if (dni.length > 8) dni = dni.slice(0, 8);
     return dni;
   }
 
   function tryGetIframeForm(iframeEl) {
     try {
-      if (!iframeEl) {
-        return null;
-      }
+      if (!iframeEl) return null;
       var iframeDoc =
-        iframeEl.contentDocument ||
-        (iframeEl.contentWindow && iframeEl.contentWindow.document);
-      if (!iframeDoc) {
-        return null;
-      }
+        iframeEl.contentDocument || (iframeEl.contentWindow && iframeEl.contentWindow.document);
+      if (!iframeDoc) return null;
       var ctForm = iframeDoc.querySelector('form#dinamic-form');
-      if (!ctForm) {
-        return null;
-      }
-      return { iframeDoc: iframeDoc, ctForm: ctForm };
+      if (!ctForm) return null;
+      return {
+        iframeDoc: iframeDoc,
+        ctForm: ctForm
+      };
     } catch (e) {
       return null;
     }
   }
 
-  function waitForIframeForm(iframeEl, callback) {
+  function waitForIframeForm(iframeEl, cb, opts) {
+    opts = opts || {};
+    var timeoutMs = opts.timeoutMs || READY_TIMEOUT_MS;
+    var intervalMs = opts.intervalMs || POLL_INTERVAL_MS;
+    var allowReloadOnce = !!opts.allowReloadOnce;
+
     var start = Date.now();
+    var didReload = false;
     var timer = null;
 
     function done(err, res) {
-      if (timer) {
-        clearInterval(timer);
-        timer = null;
-      }
+      cleanup();
+      if (err) cb(err);
+      else cb(null, res.iframeDoc, res.ctForm);
+    }
+
+    function cleanup() {
+      if (timer) clearInterval(timer);
+      timer = null;
       try {
-        iframeEl.removeEventListener('load', onLoad);
-      } catch (e) {}
-      if (err) {
-        callback(err);
-      } else {
-        callback(null, res.iframeDoc, res.ctForm);
-      }
+        iframeEl && iframeEl.removeEventListener && iframeEl.removeEventListener('load', onLoad);
+      } catch (_) {}
     }
 
     function onLoad() {
       var res = tryGetIframeForm(iframeEl);
-      if (res) {
-        done(null, res);
-      }
+      if (res) return done(null, res);
     }
 
     var immediate = tryGetIframeForm(iframeEl);
-    if (immediate) {
-      done(null, immediate);
-      return;
-    }
+    if (immediate) return done(null, immediate);
 
-    iframeEl.addEventListener('load', onLoad);
+    try {
+      iframeEl.addEventListener('load', onLoad);
+    } catch (_) {}
 
     timer = setInterval(function () {
       var res = tryGetIframeForm(iframeEl);
-      if (res) {
-        done(null, res);
-        return;
+      if (res) return done(null, res);
+
+      var elapsed = Date.now() - start;
+
+      if (allowReloadOnce && !didReload && elapsed > Math.min(6000, timeoutMs / 2)) {
+        try {
+          var d =
+            iframeEl.contentDocument ||
+            (iframeEl.contentWindow && iframeEl.contentWindow.document);
+          var url = d && d.URL;
+          if (url && String(url).indexOf('about:blank') === 0) {
+            didReload = true;
+            iframeEl.src = iframeEl.src || IFRAME_URL;
+          }
+        } catch (_) {}
       }
-      if (Date.now() - start > IFRAME_READY_TIMEOUT_MS) {
-        done(new Error('Timeout esperando form#dinamic-form en iframe.'));
+
+      if (elapsed > timeoutMs) {
+        return done(new Error('Timeout esperando form#dinamic-form en iframe.'));
       }
-    }, IFRAME_POLL_MS);
+    }, intervalMs);
   }
+  // --- Fin copia iframeSend.js ---
 
   // Crea el iframe oculto (una sola vez) y cachea el form cuando esté listo
   function ensureIframe() {
@@ -232,16 +256,24 @@
     );
     document.body.appendChild(iframe);
 
-    waitForIframeForm(iframe, function (err, iframeDoc, ctForm) {
-      if (err) {
-        console.log(err.message);
-        cachedIframeDoc = null;
-        cachedCtForm = null;
-        return;
+    waitForIframeForm(
+      iframe,
+      function (err, iframeDoc, ctForm) {
+        if (err) {
+          console.log(err.message);
+          cachedIframeDoc = null;
+          cachedCtForm = null;
+          return;
+        }
+        cachedIframeDoc = iframeDoc;
+        cachedCtForm = ctForm;
+      },
+      {
+        timeoutMs: READY_TIMEOUT_MS,
+        intervalMs: POLL_INTERVAL_MS,
+        allowReloadOnce: ALLOW_IFRAME_RELOAD_ONCE
       }
-      cachedIframeDoc = iframeDoc;
-      cachedCtForm = ctForm;
-    });
+    );
 
     return iframe;
   }
@@ -250,7 +282,7 @@
   function enviarPremioIframe(premio) {
     var iframe = ensureIframe();
     var datos = {
-      digital_id: DIGITAL_ID,
+      digital_id: getDigitalId(),
       premio_id: premio.premio_id,
       tipoDocumento: DEFAULT_DOC_TYPE,
       nroDocumento: normalizeDni(DEFAULT_DNI)
@@ -311,15 +343,23 @@
       return;
     }
 
-    waitForIframeForm(iframe, function (err, iframeDoc, ctForm) {
-      if (err) {
-        console.log(err.message);
-        return;
+    waitForIframeForm(
+      iframe,
+      function (err, iframeDoc, ctForm) {
+        if (err) {
+          console.log(err.message);
+          return;
+        }
+        cachedIframeDoc = iframeDoc;
+        cachedCtForm = ctForm;
+        fillAndLog(iframeDoc, ctForm);
+      },
+      {
+        timeoutMs: READY_TIMEOUT_MS,
+        intervalMs: POLL_INTERVAL_MS,
+        allowReloadOnce: ALLOW_IFRAME_RELOAD_ONCE
       }
-      cachedIframeDoc = iframeDoc;
-      cachedCtForm = ctForm;
-      fillAndLog(iframeDoc, ctForm);
-    });
+    );
   }
 
   // Detecta si el dispositivo soporta touch

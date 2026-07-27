@@ -72,14 +72,14 @@ padding-top: 20px;
 
 /* Navbar */
 .joh-navbar {
-width: 90%;
-height: 48px;
-background-color: #ffffff;
-border-radius: 16px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 0 12px;
+width:169px;
+height:48px;
+background-color:transparent;
+border-radius:0;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:0;
 }
 
 /* Navbar mobile: fixed en la parte superior */
@@ -90,7 +90,7 @@ left: 50%;
 transform: translateX(-50%);
 z-index: 9999;
 }
-.joh-navbar-logo { width:131px; height:24px; object-fit:contain; flex-shrink:0; }
+.joh-navbar-logo { width:169px; height:48px; flex-shrink:0; display:block; }
 .joh-navbar-divider { width:1px; height:24px; background-color:#EEEFF1; flex-shrink:0; margin:0 10px; }
 .joh-navbar-btn {
 width:125px; height:24px; border-radius:16px; background-color:#0039A6;
@@ -112,15 +112,15 @@ padding-right:16px; margin-left: 2%;
 .joh-tabs-track::-webkit-scrollbar { display:none; }
 .joh-tabs { display:flex; gap:8px; justify-content: center; margin-left: 10px;}
 .joh-tab {
-width:114px; height:32px; border-radius:16px; border:2px solid #fff;
-background-color:transparent; cursor:pointer; display:flex; align-items:center;
+width:114px; height:32px; border-radius:80px; border:2px solid #05BE50;
+background-color:rgba(255,255,255,0.15); cursor:pointer; display:flex; align-items:center;
 justify-content:center; gap:6px; padding:0 10px; flex-shrink:0;
 transition:background-color 0.2s ease, border-color 0.2s ease;
 }
-.joh-tab.joh-tab--active { background-color:#fff; border-color:#fff; }
+.joh-tab.joh-tab--active { background-color:#05BE50; border-color:#05BE50; }
 .joh-tab img { width:20px; height:20px; object-fit:contain; flex-shrink:0; }
 .joh-tab span { color:#fff; font-size:14px; font-weight:500; white-space:nowrap; }
-.joh-tab.joh-tab--active span { color:#000; }
+.joh-tab.joh-tab--active span { color:#fff; }
 
 /* Cards glassmorphism */
 .joh-card {
@@ -143,24 +143,29 @@ margin-top:16px; display:none; align-items:center; padding:0 16px; gap:12px;
 /* Imagen promo mobile 273x159 */
 .joh-promo-img-wrap { display:none; justify-content:center; width:100%; }
 .joh-promo-img-wrap.joh-visible { display:flex; }
-.joh-promo-img { width:273px; height:159px; object-fit:cover; border-radius:12px; }
+.joh-promo-img { width:350px; height:204px; object-fit:cover; border-radius:12px; }
 
 /* Card CTA mobile 327x136 */
 .joh-cta-card {
-width:327px; border-radius:20px;
+width:90%; max-width:370px; border-radius:20px;
 border: 1px solid  #FFFFFF; background:rgba(255,255,255,0.15);
 backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
 margin-top:12px; margin-bottom:44px; display:none; flex-direction:column;
-align-items:center; justify-content:  center; gap:16px; padding:20px;
+align-items:center; justify-content:  center; gap:16px; padding:20px 15px;
 }
 .joh-cta-card.joh-visible { display:flex; }
 .joh-cta-text { color:#fff; font-size:16px; font-weight:500; text-align:center; line-height:1.4; }
 .joh-cta-btn {
-width:236px; height:56px; border-radius:80px; background-color:#fff;
+width:236px; height:56px; border-radius:80px; background-color:#0039A6;
 border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;
+transition:background-color 0.2s ease;
 }
-.joh-cta-btn span { color:#000; font-size:15px; font-weight:500; white-space:nowrap; }
-.joh-cta-btn-icon { width:15px; height:15px; object-fit:contain; flex-shrink:0; }
+.joh-cta-btn:hover,
+a:hover .joh-cta-btn { background-color:#3361B8; }
+.joh-cta-btn:active,
+a:active .joh-cta-btn { background-color:#0039A6; }
+.joh-cta-btn span { color:#fff; font-size:15px; font-weight:500; white-space:nowrap; }
+.joh-cta-btn-icon { width:8px; height:13px; flex-shrink:0; display:block; }
 
 /* Pagination dots */
 .joh-dots {
@@ -227,9 +232,13 @@ padding:0px 0 40px 0; display:flex; flex-direction:column; align-items:stretch;
 .joh-c-card-title { color:#fff; font-size:20px; font-weight:500; line-height:1.3; }
 .joh-c-card-sub   { color:#fff; font-size:14px; font-weight:500; line-height:1.4; }
 .joh-c-btn-link {width: fit-content;}
-.joh-c-btn { width:159px; height:49px; border-radius:80px; border:2px solid #fff; background-color:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; }
+.joh-c-btn { width:159px; height:48px; border-radius:80px; border:none; background-color:#0039A6; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; transition:background-color 0.2s ease; }
+.joh-c-btn:hover,
+a:hover .joh-c-btn { background-color:#3361B8; }
+.joh-c-btn:active,
+a:active .joh-c-btn { background-color:#0039A6; }
 .joh-c-btn span { color:#fff; font-size:14px; font-weight:500; white-space:nowrap; }
-.joh-c-btn-icon { width:16px; height:16px; object-fit:contain; flex-shrink:0; }
+.joh-c-btn-icon { width:8px; height:13px; flex-shrink:0; display:block; }
 
 /* DESKTOP — min-width: 1024px (tablet usa layout mobile) */
 @media (min-width: 1024px) {
@@ -255,24 +264,26 @@ justify-content:flex-start; padding:0; overflow:hidden;
 /* Columna izquierda */
 .joh-col-left {
 position:relative; z-index:2; flex-shrink:0;
-display:flex; flex-direction:column; align-items:flex-start;
+display:flex; flex-direction:column; align-items:center;
 padding:60px 0 0 10%; gap:0;
 }
 
 .joh-col-left .joh-navbar {
-width:327px; height:48px; margin-bottom:25px;
-justify-content:center; padding:0 16px;
+width:169px; height:48px; margin-bottom:25px;
+justify-content:flex-start; padding:0;
+background-color:transparent; border-radius:0;
 }
 
 .joh-col-left .joh-promo-img-wrap {
 display:flex; justify-content:flex-start;
 width:auto; margin-bottom:25px;
 }
-.joh-col-left .joh-promo-img { width:491px; height:287px; border-radius:16px; }
+.joh-col-left .joh-promo-img { width:370px; height:287px; border-radius:16px; }
 
 .joh-col-left .joh-cta-card {
-display:flex; width:491px; height:140px; margin:0;
+display:flex; width:100%; max-width:none; height:140px; margin:0;
 }
+.joh-cta-text { font-size:18px; }
 
 .joh-dots { bottom:24px; }
 
@@ -383,15 +394,24 @@ alt="Hero background" />
 
 <!-- ── MOBILE ONLY ── -->
 <nav class="joh-navbar joh-mobile-only">
-<img class="joh-navbar-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Interbank_logo.svg/3840px-Interbank_logo.svg.png" alt="Interbank" />
-<div class="joh-navbar-divider"></div>
-<a href="https://interbank.pe/solicitar/cuenta/simple/inicio?pcid=quiero:ser:cliente:navbar:cs" target="_blank"><button class="joh-navbar-btn"><span>Quiero ser cliente</span></button></a>
+<svg class="joh-navbar-logo" xmlns="http://www.w3.org/2000/svg" width="169" height="48" viewBox="0 0 169 48" fill="none" aria-label="Interbank" role="img">
+<g clip-path="url(#joh-logo-clip-m)">
+<path d="M0 24C0 10.7452 10.7325 0 23.9716 0H145.028C158.268 0 169 10.7452 169 24C169 37.2548 158.268 48 145.028 48H23.9716C10.7325 48 0 37.2548 0 24Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M144.427 25.2906L144.356 25.2057L144.426 25.1228C145.766 23.4576 148.661 20.2161 149.75 19.2434H148.062C146.999 19.2458 146.264 19.3579 145.496 20.059C143.969 21.4881 142.705 23.1632 141.414 24.8232L141.167 25.1413L141.181 15.6364H138.09L138.092 32.113L141.167 32.1203V25.4363L141.415 25.7611C142.88 27.6869 144.367 29.632 146.071 31.3558C146.611 31.8872 147.456 32.2213 148.161 32.218C149.006 32.2149 149.486 32.0052 149.823 31.6067C148.974 30.6026 145.466 26.5463 144.427 25.2906ZM83.2852 18.9447C79.5348 18.9499 76.8748 21.6205 76.8652 25.957C76.8652 29.9046 80.0531 32.3612 83.3101 32.3636C85.247 32.3646 86.4544 32.0662 87.1542 31.5005V29.3047C86.156 29.7903 84.9757 29.9449 83.9305 29.9449C81.923 29.9498 80.3069 28.8635 80.0444 27.1253L80.0229 26.9701H82.3668C84.5705 26.971 86.1262 26.7718 87.1041 26.292C88.0795 25.8077 88.5052 25.0828 88.5102 23.9069C88.5102 20.8424 86.005 18.9475 83.2852 18.9447ZM84.8125 24.6274C84.2052 24.8377 83.2291 24.9199 81.6458 24.9215H80.0117L80.0213 24.7792L80.0434 24.3383C80.1182 22.7706 81.2929 21.4065 82.9881 21.4065C83.7767 21.4065 84.4388 21.5771 84.9147 21.9294C85.3902 22.281 85.6599 22.8273 85.6574 23.5149C85.6708 24.0168 85.4257 24.4242 84.8125 24.6274ZM90.125 23.9481L90.126 32.1398H93.203V24.536C93.2046 23.5167 93.4095 22.783 93.8315 22.2946C94.2544 21.8059 94.8813 21.5941 95.65 21.595C95.9627 21.595 96.2392 21.6205 96.4868 21.6637V19.2536C96.0997 19.0611 95.593 18.937 94.929 18.937C91.4829 18.9426 90.1378 21.357 90.125 23.9481ZM49.6612 32.1398H52.732V15.6379H49.6612V32.1398ZM61.0163 18.9447C56.9168 18.9499 55.1292 21.7209 55.1189 24.4436V32.1398H58.1735V24.6659C58.1735 23.7033 58.4264 22.9317 58.8811 22.3974C59.3364 21.8632 59.9879 21.5777 60.7438 21.5784C61.6261 21.5777 62.348 21.8312 62.8435 22.3879C63.335 22.9471 63.5857 23.7815 63.5857 24.9064L63.5897 32.1398H66.6394V24.6182C66.6328 20.953 64.108 18.9515 61.0163 18.9447ZM72.0376 15.6379H68.9995L69.0091 27.5444C69.0244 30.5669 70.5644 32.3482 73.8878 32.3636C75.2993 32.3618 76.1476 31.9094 76.4964 31.1837V29.3069C75.9486 29.5461 75.2058 29.6536 74.2855 29.6536C73.5954 29.6536 73.0208 29.4809 72.6259 29.0664C72.2334 28.6523 72.0376 28.0259 72.0376 27.1524V21.5793H74.7013C76.0016 21.5771 76.5478 20.7578 76.5513 20.1511V18.9447H72.0376V15.6379ZM130.08 18.9447C125.979 18.9499 124.19 21.7209 124.182 24.4436L124.199 32.1398H127.236V24.6668C127.236 23.7033 127.49 22.9317 127.943 22.3974C128.397 21.8632 129.052 21.5777 129.807 21.5784C130.687 21.5777 131.413 21.8312 131.905 22.3897C132.4 22.9471 132.651 23.7815 132.651 24.9073L132.657 32.1398H135.705V24.6172C135.698 20.9527 133.173 18.9515 130.08 18.9447ZM104.611 18.9447C102.891 18.9447 101.815 19.9553 101.168 20.8883L100.921 21.2443L100.93 15.6379H97.8983V25.8619C97.8983 30.2085 100.542 32.3636 103.979 32.3636C107.89 32.3636 110.361 29.3161 110.367 25.4218C110.361 21.6021 107.867 18.9466 104.611 18.9447ZM104.318 29.798H104.312C103.315 29.798 102.411 29.507 101.821 28.785C101.227 28.0604 100.945 26.9254 100.945 25.3963C100.95 23.2993 102.225 21.5811 103.979 21.5784C104.997 21.5777 105.836 21.8558 106.399 22.5662C106.966 23.2707 107.252 24.3694 107.252 25.9823C107.25 28.1473 106.048 29.7953 104.318 29.798ZM116.638 18.9466C114.78 18.9466 113.56 19.4402 112.708 20.1022V22.2228C113.575 21.8164 114.662 21.4798 116.141 21.4798C117.144 21.4808 118.015 21.619 118.53 22.0236C119.048 22.4279 119.279 23.085 119.278 24.0279V24.334H117.974C113.078 24.3524 111.462 26.0663 111.453 28.3234C111.455 30.6479 113.548 32.3587 116.68 32.3636H117.352C120.27 32.3572 122.275 30.4967 122.281 27.7876V24.7614C122.281 20.1471 119.576 18.966 116.638 18.9466ZM119.302 27.8104C119.302 28.5032 119.122 29.051 118.734 29.4233C118.346 29.7922 117.772 29.9698 117.033 29.9698H117.028C116.279 29.9698 115.672 29.8131 115.245 29.5089C114.816 29.2102 114.58 28.7496 114.582 28.2008C114.577 27.6364 114.786 27.1524 115.327 26.8503C115.864 26.5513 116.695 26.409 117.974 26.4063H119.302V27.8104Z" fill="#05BE50"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M22.3723 12C20.6063 12 19.1773 13.442 19.1773 15.2211V36H39.9267C41.6934 36 43.1255 34.5577 43.1255 32.7789L43.129 12H22.3723ZM37.5321 29.322L24.7676 31.6339V18.7226L37.5321 16.4103V29.322Z" fill="#0039A6"/>
+</g>
+<defs>
+<clipPath id="joh-logo-clip-m">
+<rect width="169" height="48" fill="white"/>
+</clipPath>
+</defs>
+</svg>
 </nav>
 
 <div class="joh-tabs-track joh-mobile-only">
 <div class="joh-tabs">
   <button class="joh-tab joh-tab--active" data-bg="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/87310f8d-41a6-4dee-bf1d-145e72af0433.png" data-card="viaje" data-icon-white="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/a5d47285-2ef5-42d7-86d6-4b097b0c964b.png" data-icon-black="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/3ad0083b-233f-4446-9d4e-fe594df589e5.png">
-    <span>Un viaje</span> <img src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/3ad0083b-233f-4446-9d4e-fe594df589e5.png" alt="Viaje" />
+    <span>Un viaje</span> <img src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/a5d47285-2ef5-42d7-86d6-4b097b0c964b.png" alt="Viaje" />
   </button>
   <button class="joh-tab" data-bg="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/efc5df9d-64d3-4302-81af-4ebd9f5c1d79.png" data-card="hogar" data-icon-white="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/9e513b43-0c4f-4bab-bbbb-79ce8238a092.png" data-icon-black="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/650dd100-dd1b-4cdc-bad6-716673cb3970.png">
     <span>Tu hogar</span> <img src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/9e513b43-0c4f-4bab-bbbb-79ce8238a092.png" alt="Hogar" />
@@ -441,7 +461,7 @@ alt="Hero background" />
 <a href="https://interbank.pe/solicitar/cuenta/simple/inicio?pcid=quiero:ser:cliente:hero:cs" target="_blank">
   <button class="joh-cta-btn">
     <span>Quiero ser cliente</span>
-    <img class="joh-cta-btn-icon" src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/af4b2289-af11-4de4-9dc2-711c6f521e69.png" alt="Flecha" />
+    <svg class="joh-cta-btn-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="13" viewBox="0 0 8 13" fill="none" aria-hidden="true"><path d="M0.438818 0.439795C1.0243 -0.146231 1.97482 -0.146639 2.56089 0.438818L7.19858 5.07261C7.86331 5.73664 7.86332 6.81384 7.19858 7.47788L2.56089 12.1117C1.9748 12.6971 1.0243 12.6968 0.438818 12.1107C-0.146479 11.5247 -0.145831 10.5751 0.439795 9.9896L4.15757 6.27476L0.439795 2.56187C-0.146231 1.97638 -0.146639 1.02587 0.438818 0.439795Z" fill="white"/></svg>
   </button>
 </a>
 </div>
@@ -451,7 +471,18 @@ alt="Hero background" />
 <!-- Columna izquierda -->
 <div class="joh-col-left joh-desktop-only">
 <nav class="joh-navbar">
-  <img class="joh-navbar-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Interbank_logo.svg/3840px-Interbank_logo.svg.png" alt="Interbank" />
+  <svg class="joh-navbar-logo" xmlns="http://www.w3.org/2000/svg" width="169" height="48" viewBox="0 0 169 48" fill="none" aria-label="Interbank" role="img">
+    <g clip-path="url(#joh-logo-clip-d)">
+      <path d="M0 24C0 10.7452 10.7325 0 23.9716 0H145.028C158.268 0 169 10.7452 169 24C169 37.2548 158.268 48 145.028 48H23.9716C10.7325 48 0 37.2548 0 24Z" fill="white"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M144.427 25.2906L144.356 25.2057L144.426 25.1228C145.766 23.4576 148.661 20.2161 149.75 19.2434H148.062C146.999 19.2458 146.264 19.3579 145.496 20.059C143.969 21.4881 142.705 23.1632 141.414 24.8232L141.167 25.1413L141.181 15.6364H138.09L138.092 32.113L141.167 32.1203V25.4363L141.415 25.7611C142.88 27.6869 144.367 29.632 146.071 31.3558C146.611 31.8872 147.456 32.2213 148.161 32.218C149.006 32.2149 149.486 32.0052 149.823 31.6067C148.974 30.6026 145.466 26.5463 144.427 25.2906ZM83.2852 18.9447C79.5348 18.9499 76.8748 21.6205 76.8652 25.957C76.8652 29.9046 80.0531 32.3612 83.3101 32.3636C85.247 32.3646 86.4544 32.0662 87.1542 31.5005V29.3047C86.156 29.7903 84.9757 29.9449 83.9305 29.9449C81.923 29.9498 80.3069 28.8635 80.0444 27.1253L80.0229 26.9701H82.3668C84.5705 26.971 86.1262 26.7718 87.1041 26.292C88.0795 25.8077 88.5052 25.0828 88.5102 23.9069C88.5102 20.8424 86.005 18.9475 83.2852 18.9447ZM84.8125 24.6274C84.2052 24.8377 83.2291 24.9199 81.6458 24.9215H80.0117L80.0213 24.7792L80.0434 24.3383C80.1182 22.7706 81.2929 21.4065 82.9881 21.4065C83.7767 21.4065 84.4388 21.5771 84.9147 21.9294C85.3902 22.281 85.6599 22.8273 85.6574 23.5149C85.6708 24.0168 85.4257 24.4242 84.8125 24.6274ZM90.125 23.9481L90.126 32.1398H93.203V24.536C93.2046 23.5167 93.4095 22.783 93.8315 22.2946C94.2544 21.8059 94.8813 21.5941 95.65 21.595C95.9627 21.595 96.2392 21.6205 96.4868 21.6637V19.2536C96.0997 19.0611 95.593 18.937 94.929 18.937C91.4829 18.9426 90.1378 21.357 90.125 23.9481ZM49.6612 32.1398H52.732V15.6379H49.6612V32.1398ZM61.0163 18.9447C56.9168 18.9499 55.1292 21.7209 55.1189 24.4436V32.1398H58.1735V24.6659C58.1735 23.7033 58.4264 22.9317 58.8811 22.3974C59.3364 21.8632 59.9879 21.5777 60.7438 21.5784C61.6261 21.5777 62.348 21.8312 62.8435 22.3879C63.335 22.9471 63.5857 23.7815 63.5857 24.9064L63.5897 32.1398H66.6394V24.6182C66.6328 20.953 64.108 18.9515 61.0163 18.9447ZM72.0376 15.6379H68.9995L69.0091 27.5444C69.0244 30.5669 70.5644 32.3482 73.8878 32.3636C75.2993 32.3618 76.1476 31.9094 76.4964 31.1837V29.3069C75.9486 29.5461 75.2058 29.6536 74.2855 29.6536C73.5954 29.6536 73.0208 29.4809 72.6259 29.0664C72.2334 28.6523 72.0376 28.0259 72.0376 27.1524V21.5793H74.7013C76.0016 21.5771 76.5478 20.7578 76.5513 20.1511V18.9447H72.0376V15.6379ZM130.08 18.9447C125.979 18.9499 124.19 21.7209 124.182 24.4436L124.199 32.1398H127.236V24.6668C127.236 23.7033 127.49 22.9317 127.943 22.3974C128.397 21.8632 129.052 21.5777 129.807 21.5784C130.687 21.5777 131.413 21.8312 131.905 22.3897C132.4 22.9471 132.651 23.7815 132.651 24.9073L132.657 32.1398H135.705V24.6172C135.698 20.9527 133.173 18.9515 130.08 18.9447ZM104.611 18.9447C102.891 18.9447 101.815 19.9553 101.168 20.8883L100.921 21.2443L100.93 15.6379H97.8983V25.8619C97.8983 30.2085 100.542 32.3636 103.979 32.3636C107.89 32.3636 110.361 29.3161 110.367 25.4218C110.361 21.6021 107.867 18.9466 104.611 18.9447ZM104.318 29.798H104.312C103.315 29.798 102.411 29.507 101.821 28.785C101.227 28.0604 100.945 26.9254 100.945 25.3963C100.95 23.2993 102.225 21.5811 103.979 21.5784C104.997 21.5777 105.836 21.8558 106.399 22.5662C106.966 23.2707 107.252 24.3694 107.252 25.9823C107.25 28.1473 106.048 29.7953 104.318 29.798ZM116.638 18.9466C114.78 18.9466 113.56 19.4402 112.708 20.1022V22.2228C113.575 21.8164 114.662 21.4798 116.141 21.4798C117.144 21.4808 118.015 21.619 118.53 22.0236C119.048 22.4279 119.279 23.085 119.278 24.0279V24.334H117.974C113.078 24.3524 111.462 26.0663 111.453 28.3234C111.455 30.6479 113.548 32.3587 116.68 32.3636H117.352C120.27 32.3572 122.275 30.4967 122.281 27.7876V24.7614C122.281 20.1471 119.576 18.966 116.638 18.9466ZM119.302 27.8104C119.302 28.5032 119.122 29.051 118.734 29.4233C118.346 29.7922 117.772 29.9698 117.033 29.9698H117.028C116.279 29.9698 115.672 29.8131 115.245 29.5089C114.816 29.2102 114.58 28.7496 114.582 28.2008C114.577 27.6364 114.786 27.1524 115.327 26.8503C115.864 26.5513 116.695 26.409 117.974 26.4063H119.302V27.8104Z" fill="#05BE50"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M22.3723 12C20.6063 12 19.1773 13.442 19.1773 15.2211V36H39.9267C41.6934 36 43.1255 34.5577 43.1255 32.7789L43.129 12H22.3723ZM37.5321 29.322L24.7676 31.6339V18.7226L37.5321 16.4103V29.322Z" fill="#0039A6"/>
+    </g>
+    <defs>
+      <clipPath id="joh-logo-clip-d">
+        <rect width="169" height="48" fill="white"/>
+      </clipPath>
+    </defs>
+  </svg>
 </nav>
 <div class="joh-promo-img-wrap joh-visible">
   <img class="joh-promo-img" src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/6684ac5d-64f5-4191-b4ca-d481a9edc292.png" alt="Promo" />
@@ -461,7 +492,7 @@ alt="Hero background" />
   <a href="https://interbank.pe/solicitar/cuenta/simple/inicio?pcid=quiero:ser:cliente:hero:cs" target="_blank">
     <button class="joh-cta-btn">
       <span>Quiero ser cliente</span>
-      <img class="joh-cta-btn-icon" src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/af4b2289-af11-4de4-9dc2-711c6f521e69.png" alt="Flecha" />
+      <svg class="joh-cta-btn-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="13" viewBox="0 0 8 13" fill="none" aria-hidden="true"><path d="M0.438818 0.439795C1.0243 -0.146231 1.97482 -0.146639 2.56089 0.438818L7.19858 5.07261C7.86331 5.73664 7.86332 6.81384 7.19858 7.47788L2.56089 12.1117C1.9748 12.6971 1.0243 12.6968 0.438818 12.1107C-0.146479 11.5247 -0.145831 10.5751 0.439795 9.9896L4.15757 6.27476L0.439795 2.56187C-0.146231 1.97638 -0.146639 1.02587 0.438818 0.439795Z" fill="white"/></svg>
     </button>
   </a>
 </div>
@@ -499,7 +530,7 @@ alt="Hero background" />
 <div class="joh-tabs-track">
   <div class="joh-tabs">
     <button class="joh-tab joh-tab--active" data-bg="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/b599635f-44a9-42f8-b127-5cc51f02894b.png" data-card="viaje" data-icon-white="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/a5d47285-2ef5-42d7-86d6-4b097b0c964b.png" data-icon-black="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/3ad0083b-233f-4446-9d4e-fe594df589e5.png">
-      <span>Un viaje</span> <img src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/3ad0083b-233f-4446-9d4e-fe594df589e5.png" alt="Viaje" />
+      <span>Un viaje</span> <img src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/a5d47285-2ef5-42d7-86d6-4b097b0c964b.png" alt="Viaje" />
     </button>
     <button class="joh-tab" data-bg="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/9ad28054-450f-4275-8ed5-de23d534cecb.png" data-card="hogar" data-icon-white="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/9e513b43-0c4f-4bab-bbbb-79ce8238a092.png" data-icon-black="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/650dd100-dd1b-4cdc-bad6-716673cb3970.png">
       <span>Tu hogar</span> <img src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/9e513b43-0c4f-4bab-bbbb-79ce8238a092.png" alt="Hogar" />
@@ -554,7 +585,7 @@ alt="Hero background" />
     <a class="joh-c-btn-link" href="https://interbank.pe/solicitar/cuenta/simple/inicio?pcid=quiero:ser:cliente:flexcard:cs" target="_blank">
       <button class="joh-c-btn">
         <span>Lo quiero</span>
-        <img class="joh-c-btn-icon" src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/9a83a9f8-a339-4dc6-93bd-2be0901d19ae.png" alt="Flecha" />
+        <svg class="joh-c-btn-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="13" viewBox="0 0 8 13" fill="none" aria-hidden="true"><path d="M0.438818 0.439795C1.0243 -0.146231 1.97482 -0.146639 2.56089 0.438818L7.19858 5.07261C7.86331 5.73664 7.86332 6.81384 7.19858 7.47788L2.56089 12.1117C1.9748 12.6971 1.0243 12.6968 0.438818 12.1107C-0.146479 11.5247 -0.145831 10.5751 0.439795 9.9896L4.15757 6.27476L0.439795 2.56187C-0.146231 1.97638 -0.146639 1.02587 0.438818 0.439795Z" fill="white"/></svg>
       </button>
     </a>
   </div>
@@ -573,7 +604,7 @@ alt="Hero background" />
     <a class="joh-c-btn-link" href="https://interbank.pe/solicitar/tarjeta/creditoinnominada/inicio?pcid=quiero:ser:cliente:flexcard:tc" target="_blank">
     <button class="joh-c-btn">
       <span>Lo quiero</span>
-      <img class="joh-c-btn-icon" src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/9a83a9f8-a339-4dc6-93bd-2be0901d19ae.png" alt="Flecha" />
+      <svg class="joh-c-btn-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="13" viewBox="0 0 8 13" fill="none" aria-hidden="true"><path d="M0.438818 0.439795C1.0243 -0.146231 1.97482 -0.146639 2.56089 0.438818L7.19858 5.07261C7.86331 5.73664 7.86332 6.81384 7.19858 7.47788L2.56089 12.1117C1.9748 12.6971 1.0243 12.6968 0.438818 12.1107C-0.146479 11.5247 -0.145831 10.5751 0.439795 9.9896L4.15757 6.27476L0.439795 2.56187C-0.146231 1.97638 -0.146639 1.02587 0.438818 0.439795Z" fill="white"/></svg>
     </button>
     </a>
   </div>
@@ -592,7 +623,7 @@ alt="Hero background" />
     <a class="joh-c-btn-link" href="https://interbank.pe/solicitar/cuenta/millonaria-premio/inicio?pcid=quiero:ser:cliente:flexcard:millo" target="_blank">
     <button class="joh-c-btn">
       <span>Lo quiero</span>
-      <img class="joh-c-btn-icon" src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/9a83a9f8-a339-4dc6-93bd-2be0901d19ae.png" alt="Flecha" />
+      <svg class="joh-c-btn-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="13" viewBox="0 0 8 13" fill="none" aria-hidden="true"><path d="M0.438818 0.439795C1.0243 -0.146231 1.97482 -0.146639 2.56089 0.438818L7.19858 5.07261C7.86331 5.73664 7.86332 6.81384 7.19858 7.47788L2.56089 12.1117C1.9748 12.6971 1.0243 12.6968 0.438818 12.1107C-0.146479 11.5247 -0.145831 10.5751 0.439795 9.9896L4.15757 6.27476L0.439795 2.56187C-0.146231 1.97638 -0.146639 1.02587 0.438818 0.439795Z" fill="white"/></svg>
     </button>
     </a>
   </div>
@@ -611,7 +642,7 @@ alt="Hero background" />
     <a class="joh-c-btn-link" href="https://interbank.pe/solicitar/prestamo/efectivo/inicio?pcid=quiero:ser:cliente:flexcard:pp" target="_blank">
       <button class="joh-c-btn">
         <span>Lo quiero</span>
-        <img class="joh-c-btn-icon" src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/9a83a9f8-a339-4dc6-93bd-2be0901d19ae.png" alt="Flecha" />
+        <svg class="joh-c-btn-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="13" viewBox="0 0 8 13" fill="none" aria-hidden="true"><path d="M0.438818 0.439795C1.0243 -0.146231 1.97482 -0.146639 2.56089 0.438818L7.19858 5.07261C7.86331 5.73664 7.86332 6.81384 7.19858 7.47788L2.56089 12.1117C1.9748 12.6971 1.0243 12.6968 0.438818 12.1107C-0.146479 11.5247 -0.145831 10.5751 0.439795 9.9896L4.15757 6.27476L0.439795 2.56187C-0.146231 1.97638 -0.146639 1.02587 0.438818 0.439795Z" fill="white"/></svg>
       </button>
     </a>
   </div>
@@ -690,7 +721,7 @@ alt="Hero background" />
           t.classList.toggle('joh-tab--active', isActive);
           var img = t.querySelector('img');
           if (img) {
-              var iconSrc = isActive ? t.getAttribute('data-icon-black') : t.getAttribute('data-icon-white');
+              var iconSrc = t.getAttribute('data-icon-white');
               if (iconSrc) img.src = iconSrc;
           }
       });
@@ -1004,7 +1035,7 @@ alt="Hero background" />
       '.adc_accordion__title{font-size:16px}',
       '.adc_accordion__panel-body{padding:0 20px 18px 20px}',
       '.adc_section-promotions{padding:48px 0}',
-      '.adc_section-promotions__container{max-width:1120px;padding:0}',
+      '.adc_section-promotions__container{padding: 0}',
       '.adc_section-promotions__header{align-items:center;margin-bottom:32px;text-align:center}',
       '.adc_section-promotions__subtitle{font-size:14px}',
       '.adc_section-promotions__title{font-size:24px;margin-left:auto;margin-right:auto;max-width:800px}',
@@ -1045,13 +1076,13 @@ alt="Hero background" />
       '@media (min-width:1200px){',
       '.adc_section-benefits{padding:56px 0}',
       '.adc_section-benefits__container{padding:0 10px}',
-      '.adc_section-promotions__container{padding:0}',
+      '.adc_section-promotions__container{padding: 0 0 0 20px}',
       '.adc_section-promotions__track{padding-right:64px}',
       '.adc_section-footer__container{max-width:1280px;padding:0 56px}',
       '.adc_section-footer__inner{gap:48px}',
       '.adc_section-footer__content{max-width:380px}',
       '.adc_section-footer__title{font-size:26px}',
-      '.adc_section-footer__panel{max-width:600px;padding:5px 28px 0}',
+      '.adc_section-footer__panel{max-width:600px;padding:0 28px}',
       '.adc_section-footer__panel-phone-wrap{height:200px}',
       '.adc_section-footer__panel-phone{height:200px}',
       '.adc_section-footer__panel-qr{height:140px;width:140px}',

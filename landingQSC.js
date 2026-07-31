@@ -83,15 +83,28 @@ justify-content: space-between;
 padding: 0 12px;
 }
 
-/* Navbar mobile: fixed en la parte superior */
+/* Navbar mobile: solo logo desktop, centrado */
 .joh-navbar.joh-mobile-only {
 position: fixed;
 top: 26px;
 left: 50%;
 transform: translateX(-50%);
 z-index: 9999;
+width: 169px;
+max-width: 169px;
+height: 48px;
+padding: 0;
+background-color: transparent;
+border-radius: 0;
+justify-content: center;
 }
 .joh-navbar-logo { width:131px; height:24px; object-fit:contain; flex-shrink:0; }
+.joh-navbar-logo-link { display:inline-flex; line-height:0; text-decoration:none; }
+.joh-navbar.joh-mobile-only .joh-navbar-logo {
+width: 169px;
+height: 38px;
+display: block;
+}
 .joh-navbar-divider { width:1px; height:24px; background-color:#EEEFF1; flex-shrink:0; margin:0 10px; }
 .joh-navbar-btn {
 width:125px; height:24px; border-radius:16px; background-color:#0039A6;
@@ -251,7 +264,7 @@ a:active .joh-c-btn { background-color:#0039A6; }
 /* Hero full dekstop width border-radius */
 .joh-wrapper {
 width: 100%;
-height: 691px;
+height: 661px;
 overflow: hidden;
 border-radius: 0 0 20px 20px;
 }
@@ -266,16 +279,7 @@ justify-content:flex-start; padding:0; overflow:hidden;
 .joh-col-left {
 position:relative; z-index:2; flex-shrink:0;
 display:flex; flex-direction:column; align-items:center;
-padding:60px 0 0 10%; gap:0;
-}
-
-.joh-col-left .joh-navbar {
-width:169px; height:48px; margin-bottom:25px;
-justify-content:flex-start; padding:0;
-background-color:transparent; border-radius:0;
-}
-.joh-col-left .joh-navbar-logo {
-width:169px; height:48px; object-fit:contain; display:block;
+padding:120px 0 0 10%; gap:0;
 }
 
 .joh-col-left .joh-promo-img-wrap {
@@ -283,7 +287,7 @@ display:flex; justify-content:flex-start;
 width:auto; margin-bottom:25px;
 }
 .joh-col-left .joh-promo-img {
-width:248px; height:287px; border-radius:0;
+width:438px; height:250px; border-radius:0;
 object-fit:contain; display:block;
 }
 
@@ -294,16 +298,27 @@ display:flex; width:100%; max-width:none; height:140px; margin:0;
 
 .joh-dots { bottom:24px; }
 
-/* Columna derecha */
+/* Columna derecha: anclada a la derecha como en Figma */
 .joh-col-right {
-position:relative; z-index:2; flex:1;
+position:absolute; top:60px; right:10%; bottom:24px; z-index:2;
+width:383px;
 display:flex; flex-direction:column;
 align-items:center; justify-content:center; gap:0;
-margin-top: 120px;
+margin:0; padding:0;
 }
 
-/* Card desktop: 320x92, arriba */
-.joh-col-right .joh-card { width:320px; height:92px; margin:0 0 20px 20px; }
+.joh-col-right .joh-navbar {
+position:absolute; top:0; right:0;
+width:169px; height:48px; margin:0; padding:0;
+justify-content:flex-end;
+background-color:transparent; border-radius:0;
+}
+.joh-col-right .joh-navbar-logo {
+width:169px; height:48px; object-fit:contain; display:block;
+}
+
+/* Card desktop: 320x92, centrada respecto a los tabs */
+.joh-col-right .joh-card { width:320px; height:92px; margin:0 0 20px; }
 .joh-col-right .joh-card:not(.joh-card--visible) { display:none; }
 
 /* Tabs desktop: 383px, debajo */
@@ -401,9 +416,20 @@ alt="Hero background" />
 
 <!-- ── MOBILE ONLY ── -->
 <nav class="joh-navbar joh-mobile-only">
-<img class="joh-navbar-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Interbank_logo.svg/3840px-Interbank_logo.svg.png" alt="Interbank" />
-<div class="joh-navbar-divider"></div>
-<a href="https://interbank.pe/solicitar/cuenta/simple/inicio?pcid=quiero:ser:cliente:navbar:cs" target="_blank"><button class="joh-navbar-btn"><span>Quiero ser cliente</span></button></a>
+<a class="joh-navbar-logo-link" href="https://interbank.pe/?pcid=quiero:ser:cliente:logo:ibk" target="_blank" rel="noopener noreferrer" aria-label="Interbank">
+<svg class="joh-navbar-logo" xmlns="http://www.w3.org/2000/svg" width="169" height="48" viewBox="0 0 169 48" fill="none" aria-hidden="true">
+  <g clip-path="url(#joh-logo-clip-m)">
+    <path d="M0 24C0 10.7452 10.7325 0 23.9716 0H145.028C158.268 0 169 10.7452 169 24C169 37.2548 158.268 48 145.028 48H23.9716C10.7325 48 0 37.2548 0 24Z" fill="white"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M144.427 25.2906L144.356 25.2057L144.426 25.1228C145.766 23.4576 148.661 20.2161 149.75 19.2434H148.062C146.999 19.2458 146.264 19.3579 145.496 20.059C143.969 21.4881 142.705 23.1632 141.414 24.8232L141.167 25.1413L141.181 15.6364H138.09L138.092 32.113L141.167 32.1203V25.4363L141.415 25.7611C142.88 27.6869 144.367 29.632 146.071 31.3558C146.611 31.8872 147.456 32.2213 148.161 32.218C149.006 32.2149 149.486 32.0052 149.823 31.6067C148.974 30.6026 145.466 26.5463 144.427 25.2906ZM83.2852 18.9447C79.5348 18.9499 76.8748 21.6205 76.8652 25.957C76.8652 29.9046 80.0531 32.3612 83.3101 32.3636C85.247 32.3646 86.4544 32.0662 87.1542 31.5005V29.3047C86.156 29.7903 84.9757 29.9449 83.9305 29.9449C81.923 29.9498 80.3069 28.8635 80.0444 27.1253L80.0229 26.9701H82.3668C84.5705 26.971 86.1262 26.7718 87.1041 26.292C88.0795 25.8077 88.5052 25.0828 88.5102 23.9069C88.5102 20.8424 86.005 18.9475 83.2852 18.9447ZM84.8125 24.6274C84.2052 24.8377 83.2291 24.9199 81.6458 24.9215H80.0117L80.0213 24.7792L80.0434 24.3383C80.1182 22.7706 81.2929 21.4065 82.9881 21.4065C83.7767 21.4065 84.4388 21.5771 84.9147 21.9294C85.3902 22.281 85.6599 22.8273 85.6574 23.5149C85.6708 24.0168 85.4257 24.4242 84.8125 24.6274ZM90.125 23.9481L90.126 32.1398H93.203V24.536C93.2046 23.5167 93.4095 22.783 93.8315 22.2946C94.2544 21.8059 94.8813 21.5941 95.65 21.595C95.9627 21.595 96.2392 21.6205 96.4868 21.6637V19.2536C96.0997 19.0611 95.593 18.937 94.929 18.937C91.4829 18.9426 90.1378 21.357 90.125 23.9481ZM49.6612 32.1398H52.732V15.6379H49.6612V32.1398ZM61.0163 18.9447C56.9168 18.9499 55.1292 21.7209 55.1189 24.4436V32.1398H58.1735V24.6659C58.1735 23.7033 58.4264 22.9317 58.8811 22.3974C59.3364 21.8632 59.9879 21.5777 60.7438 21.5784C61.6261 21.5777 62.348 21.8312 62.8435 22.3879C63.335 22.9471 63.5857 23.7815 63.5857 24.9064L63.5897 32.1398H66.6394V24.6182C66.6328 20.953 64.108 18.9515 61.0163 18.9447ZM72.0376 15.6379H68.9995L69.0091 27.5444C69.0244 30.5669 70.5644 32.3482 73.8878 32.3636C75.2993 32.3618 76.1476 31.9094 76.4964 31.1837V29.3069C75.9486 29.5461 75.2058 29.6536 74.2855 29.6536C73.5954 29.6536 73.0208 29.4809 72.6259 29.0664C72.2334 28.6523 72.0376 28.0259 72.0376 27.1524V21.5793H74.7013C76.0016 21.5771 76.5478 20.7578 76.5513 20.1511V18.9447H72.0376V15.6379ZM130.08 18.9447C125.979 18.9499 124.19 21.7209 124.182 24.4436L124.199 32.1398H127.236V24.6668C127.236 23.7033 127.49 22.9317 127.943 22.3974C128.397 21.8632 129.052 21.5777 129.807 21.5784C130.687 21.5777 131.413 21.8312 131.905 22.3897C132.4 22.9471 132.651 23.7815 132.651 24.9073L132.657 32.1398H135.705V24.6172C135.698 20.9527 133.173 18.9515 130.08 18.9447ZM104.611 18.9447C102.891 18.9447 101.815 19.9553 101.168 20.8883L100.921 21.2443L100.93 15.6379H97.8983V25.8619C97.8983 30.2085 100.542 32.3636 103.979 32.3636C107.89 32.3636 110.361 29.3161 110.367 25.4218C110.361 21.6021 107.867 18.9466 104.611 18.9447ZM104.318 29.798H104.312C103.315 29.798 102.411 29.507 101.821 28.785C101.227 28.0604 100.945 26.9254 100.945 25.3963C100.95 23.2993 102.225 21.5811 103.979 21.5784C104.997 21.5777 105.836 21.8558 106.399 22.5662C106.966 23.2707 107.252 24.3694 107.252 25.9823C107.25 28.1473 106.048 29.7953 104.318 29.798ZM116.638 18.9466C114.78 18.9466 113.56 19.4402 112.708 20.1022V22.2228C113.575 21.8164 114.662 21.4798 116.141 21.4798C117.144 21.4808 118.015 21.619 118.53 22.0236C119.048 22.4279 119.279 23.085 119.278 24.0279V24.334H117.974C113.078 24.3524 111.462 26.0663 111.453 28.3234C111.455 30.6479 113.548 32.3587 116.68 32.3636H117.352C120.27 32.3572 122.275 30.4967 122.281 27.7876V24.7614C122.281 20.1471 119.576 18.966 116.638 18.9466ZM119.302 27.8104C119.302 28.5032 119.122 29.051 118.734 29.4233C118.346 29.7922 117.772 29.9698 117.033 29.9698H117.028C116.279 29.9698 115.672 29.8131 115.245 29.5089C114.816 29.2102 114.58 28.7496 114.582 28.2008C114.577 27.6364 114.786 27.1524 115.327 26.8503C115.864 26.5513 116.695 26.409 117.974 26.4063H119.302V27.8104Z" fill="#05BE50"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M22.3723 12C20.6063 12 19.1773 13.442 19.1773 15.2211V36H39.9267C41.6934 36 43.1255 34.5577 43.1255 32.7789L43.129 12H22.3723ZM37.5321 29.322L24.7676 31.6339V18.7226L37.5321 16.4103V29.322Z" fill="#0039A6"/>
+  </g>
+  <defs>
+    <clipPath id="joh-logo-clip-m">
+      <rect width="169" height="48" fill="white"/>
+    </clipPath>
+  </defs>
+</svg>
+</a>
 </nav>
 
 <div class="joh-tabs-track joh-mobile-only">
@@ -468,22 +494,8 @@ alt="Hero background" />
 
 <!-- Columna izquierda -->
 <div class="joh-col-left joh-desktop-only">
-<nav class="joh-navbar">
-  <svg class="joh-navbar-logo" xmlns="http://www.w3.org/2000/svg" width="169" height="48" viewBox="0 0 169 48" fill="none" aria-label="Interbank" role="img">
-    <g clip-path="url(#joh-logo-clip-d)">
-      <path d="M0 24C0 10.7452 10.7325 0 23.9716 0H145.028C158.268 0 169 10.7452 169 24C169 37.2548 158.268 48 145.028 48H23.9716C10.7325 48 0 37.2548 0 24Z" fill="white"/>
-      <path fill-rule="evenodd" clip-rule="evenodd" d="M144.427 25.2906L144.356 25.2057L144.426 25.1228C145.766 23.4576 148.661 20.2161 149.75 19.2434H148.062C146.999 19.2458 146.264 19.3579 145.496 20.059C143.969 21.4881 142.705 23.1632 141.414 24.8232L141.167 25.1413L141.181 15.6364H138.09L138.092 32.113L141.167 32.1203V25.4363L141.415 25.7611C142.88 27.6869 144.367 29.632 146.071 31.3558C146.611 31.8872 147.456 32.2213 148.161 32.218C149.006 32.2149 149.486 32.0052 149.823 31.6067C148.974 30.6026 145.466 26.5463 144.427 25.2906ZM83.2852 18.9447C79.5348 18.9499 76.8748 21.6205 76.8652 25.957C76.8652 29.9046 80.0531 32.3612 83.3101 32.3636C85.247 32.3646 86.4544 32.0662 87.1542 31.5005V29.3047C86.156 29.7903 84.9757 29.9449 83.9305 29.9449C81.923 29.9498 80.3069 28.8635 80.0444 27.1253L80.0229 26.9701H82.3668C84.5705 26.971 86.1262 26.7718 87.1041 26.292C88.0795 25.8077 88.5052 25.0828 88.5102 23.9069C88.5102 20.8424 86.005 18.9475 83.2852 18.9447ZM84.8125 24.6274C84.2052 24.8377 83.2291 24.9199 81.6458 24.9215H80.0117L80.0213 24.7792L80.0434 24.3383C80.1182 22.7706 81.2929 21.4065 82.9881 21.4065C83.7767 21.4065 84.4388 21.5771 84.9147 21.9294C85.3902 22.281 85.6599 22.8273 85.6574 23.5149C85.6708 24.0168 85.4257 24.4242 84.8125 24.6274ZM90.125 23.9481L90.126 32.1398H93.203V24.536C93.2046 23.5167 93.4095 22.783 93.8315 22.2946C94.2544 21.8059 94.8813 21.5941 95.65 21.595C95.9627 21.595 96.2392 21.6205 96.4868 21.6637V19.2536C96.0997 19.0611 95.593 18.937 94.929 18.937C91.4829 18.9426 90.1378 21.357 90.125 23.9481ZM49.6612 32.1398H52.732V15.6379H49.6612V32.1398ZM61.0163 18.9447C56.9168 18.9499 55.1292 21.7209 55.1189 24.4436V32.1398H58.1735V24.6659C58.1735 23.7033 58.4264 22.9317 58.8811 22.3974C59.3364 21.8632 59.9879 21.5777 60.7438 21.5784C61.6261 21.5777 62.348 21.8312 62.8435 22.3879C63.335 22.9471 63.5857 23.7815 63.5857 24.9064L63.5897 32.1398H66.6394V24.6182C66.6328 20.953 64.108 18.9515 61.0163 18.9447ZM72.0376 15.6379H68.9995L69.0091 27.5444C69.0244 30.5669 70.5644 32.3482 73.8878 32.3636C75.2993 32.3618 76.1476 31.9094 76.4964 31.1837V29.3069C75.9486 29.5461 75.2058 29.6536 74.2855 29.6536C73.5954 29.6536 73.0208 29.4809 72.6259 29.0664C72.2334 28.6523 72.0376 28.0259 72.0376 27.1524V21.5793H74.7013C76.0016 21.5771 76.5478 20.7578 76.5513 20.1511V18.9447H72.0376V15.6379ZM130.08 18.9447C125.979 18.9499 124.19 21.7209 124.182 24.4436L124.199 32.1398H127.236V24.6668C127.236 23.7033 127.49 22.9317 127.943 22.3974C128.397 21.8632 129.052 21.5777 129.807 21.5784C130.687 21.5777 131.413 21.8312 131.905 22.3897C132.4 22.9471 132.651 23.7815 132.651 24.9073L132.657 32.1398H135.705V24.6172C135.698 20.9527 133.173 18.9515 130.08 18.9447ZM104.611 18.9447C102.891 18.9447 101.815 19.9553 101.168 20.8883L100.921 21.2443L100.93 15.6379H97.8983V25.8619C97.8983 30.2085 100.542 32.3636 103.979 32.3636C107.89 32.3636 110.361 29.3161 110.367 25.4218C110.361 21.6021 107.867 18.9466 104.611 18.9447ZM104.318 29.798H104.312C103.315 29.798 102.411 29.507 101.821 28.785C101.227 28.0604 100.945 26.9254 100.945 25.3963C100.95 23.2993 102.225 21.5811 103.979 21.5784C104.997 21.5777 105.836 21.8558 106.399 22.5662C106.966 23.2707 107.252 24.3694 107.252 25.9823C107.25 28.1473 106.048 29.7953 104.318 29.798ZM116.638 18.9466C114.78 18.9466 113.56 19.4402 112.708 20.1022V22.2228C113.575 21.8164 114.662 21.4798 116.141 21.4798C117.144 21.4808 118.015 21.619 118.53 22.0236C119.048 22.4279 119.279 23.085 119.278 24.0279V24.334H117.974C113.078 24.3524 111.462 26.0663 111.453 28.3234C111.455 30.6479 113.548 32.3587 116.68 32.3636H117.352C120.27 32.3572 122.275 30.4967 122.281 27.7876V24.7614C122.281 20.1471 119.576 18.966 116.638 18.9466ZM119.302 27.8104C119.302 28.5032 119.122 29.051 118.734 29.4233C118.346 29.7922 117.772 29.9698 117.033 29.9698H117.028C116.279 29.9698 115.672 29.8131 115.245 29.5089C114.816 29.2102 114.58 28.7496 114.582 28.2008C114.577 27.6364 114.786 27.1524 115.327 26.8503C115.864 26.5513 116.695 26.409 117.974 26.4063H119.302V27.8104Z" fill="#05BE50"/>
-      <path fill-rule="evenodd" clip-rule="evenodd" d="M22.3723 12C20.6063 12 19.1773 13.442 19.1773 15.2211V36H39.9267C41.6934 36 43.1255 34.5577 43.1255 32.7789L43.129 12H22.3723ZM37.5321 29.322L24.7676 31.6339V18.7226L37.5321 16.4103V29.322Z" fill="#0039A6"/>
-    </g>
-    <defs>
-      <clipPath id="joh-logo-clip-d">
-        <rect width="169" height="48" fill="white"/>
-      </clipPath>
-    </defs>
-  </svg>
-</nav>
 <div class="joh-promo-img-wrap joh-visible">
-  <img class="joh-promo-img" src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/b49ff7ba-64c7-4e78-aef3-0bedaf65849b.png" alt="Promo" />
+  <img class="joh-promo-img" src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/6684ac5d-64f5-4191-b4ca-d481a9edc292.png" alt="Promo" />
 </div>
 <div class="joh-cta-card joh-visible">
   <span class="joh-cta-text">Comienza a ser cliente y logra tus sueños</span>
@@ -498,6 +510,22 @@ alt="Hero background" />
 
 <!-- Columna derecha -->
 <div class="joh-col-right joh-desktop-only">
+<nav class="joh-navbar">
+  <a class="joh-navbar-logo-link" href="https://interbank.pe/?pcid=quiero:ser:cliente:logo:ibk" target="_blank" rel="noopener noreferrer" aria-label="Interbank">
+  <svg class="joh-navbar-logo" xmlns="http://www.w3.org/2000/svg" width="169" height="48" viewBox="0 0 169 48" fill="none" aria-hidden="true">
+    <g clip-path="url(#joh-logo-clip-d)">
+      <path d="M0 24C0 10.7452 10.7325 0 23.9716 0H145.028C158.268 0 169 10.7452 169 24C169 37.2548 158.268 48 145.028 48H23.9716C10.7325 48 0 37.2548 0 24Z" fill="white"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M144.427 25.2906L144.356 25.2057L144.426 25.1228C145.766 23.4576 148.661 20.2161 149.75 19.2434H148.062C146.999 19.2458 146.264 19.3579 145.496 20.059C143.969 21.4881 142.705 23.1632 141.414 24.8232L141.167 25.1413L141.181 15.6364H138.09L138.092 32.113L141.167 32.1203V25.4363L141.415 25.7611C142.88 27.6869 144.367 29.632 146.071 31.3558C146.611 31.8872 147.456 32.2213 148.161 32.218C149.006 32.2149 149.486 32.0052 149.823 31.6067C148.974 30.6026 145.466 26.5463 144.427 25.2906ZM83.2852 18.9447C79.5348 18.9499 76.8748 21.6205 76.8652 25.957C76.8652 29.9046 80.0531 32.3612 83.3101 32.3636C85.247 32.3646 86.4544 32.0662 87.1542 31.5005V29.3047C86.156 29.7903 84.9757 29.9449 83.9305 29.9449C81.923 29.9498 80.3069 28.8635 80.0444 27.1253L80.0229 26.9701H82.3668C84.5705 26.971 86.1262 26.7718 87.1041 26.292C88.0795 25.8077 88.5052 25.0828 88.5102 23.9069C88.5102 20.8424 86.005 18.9475 83.2852 18.9447ZM84.8125 24.6274C84.2052 24.8377 83.2291 24.9199 81.6458 24.9215H80.0117L80.0213 24.7792L80.0434 24.3383C80.1182 22.7706 81.2929 21.4065 82.9881 21.4065C83.7767 21.4065 84.4388 21.5771 84.9147 21.9294C85.3902 22.281 85.6599 22.8273 85.6574 23.5149C85.6708 24.0168 85.4257 24.4242 84.8125 24.6274ZM90.125 23.9481L90.126 32.1398H93.203V24.536C93.2046 23.5167 93.4095 22.783 93.8315 22.2946C94.2544 21.8059 94.8813 21.5941 95.65 21.595C95.9627 21.595 96.2392 21.6205 96.4868 21.6637V19.2536C96.0997 19.0611 95.593 18.937 94.929 18.937C91.4829 18.9426 90.1378 21.357 90.125 23.9481ZM49.6612 32.1398H52.732V15.6379H49.6612V32.1398ZM61.0163 18.9447C56.9168 18.9499 55.1292 21.7209 55.1189 24.4436V32.1398H58.1735V24.6659C58.1735 23.7033 58.4264 22.9317 58.8811 22.3974C59.3364 21.8632 59.9879 21.5777 60.7438 21.5784C61.6261 21.5777 62.348 21.8312 62.8435 22.3879C63.335 22.9471 63.5857 23.7815 63.5857 24.9064L63.5897 32.1398H66.6394V24.6182C66.6328 20.953 64.108 18.9515 61.0163 18.9447ZM72.0376 15.6379H68.9995L69.0091 27.5444C69.0244 30.5669 70.5644 32.3482 73.8878 32.3636C75.2993 32.3618 76.1476 31.9094 76.4964 31.1837V29.3069C75.9486 29.5461 75.2058 29.6536 74.2855 29.6536C73.5954 29.6536 73.0208 29.4809 72.6259 29.0664C72.2334 28.6523 72.0376 28.0259 72.0376 27.1524V21.5793H74.7013C76.0016 21.5771 76.5478 20.7578 76.5513 20.1511V18.9447H72.0376V15.6379ZM130.08 18.9447C125.979 18.9499 124.19 21.7209 124.182 24.4436L124.199 32.1398H127.236V24.6668C127.236 23.7033 127.49 22.9317 127.943 22.3974C128.397 21.8632 129.052 21.5777 129.807 21.5784C130.687 21.5777 131.413 21.8312 131.905 22.3897C132.4 22.9471 132.651 23.7815 132.651 24.9073L132.657 32.1398H135.705V24.6172C135.698 20.9527 133.173 18.9515 130.08 18.9447ZM104.611 18.9447C102.891 18.9447 101.815 19.9553 101.168 20.8883L100.921 21.2443L100.93 15.6379H97.8983V25.8619C97.8983 30.2085 100.542 32.3636 103.979 32.3636C107.89 32.3636 110.361 29.3161 110.367 25.4218C110.361 21.6021 107.867 18.9466 104.611 18.9447ZM104.318 29.798H104.312C103.315 29.798 102.411 29.507 101.821 28.785C101.227 28.0604 100.945 26.9254 100.945 25.3963C100.95 23.2993 102.225 21.5811 103.979 21.5784C104.997 21.5777 105.836 21.8558 106.399 22.5662C106.966 23.2707 107.252 24.3694 107.252 25.9823C107.25 28.1473 106.048 29.7953 104.318 29.798ZM116.638 18.9466C114.78 18.9466 113.56 19.4402 112.708 20.1022V22.2228C113.575 21.8164 114.662 21.4798 116.141 21.4798C117.144 21.4808 118.015 21.619 118.53 22.0236C119.048 22.4279 119.279 23.085 119.278 24.0279V24.334H117.974C113.078 24.3524 111.462 26.0663 111.453 28.3234C111.455 30.6479 113.548 32.3587 116.68 32.3636H117.352C120.27 32.3572 122.275 30.4967 122.281 27.7876V24.7614C122.281 20.1471 119.576 18.966 116.638 18.9466ZM119.302 27.8104C119.302 28.5032 119.122 29.051 118.734 29.4233C118.346 29.7922 117.772 29.9698 117.033 29.9698H117.028C116.279 29.9698 115.672 29.8131 115.245 29.5089C114.816 29.2102 114.58 28.7496 114.582 28.2008C114.577 27.6364 114.786 27.1524 115.327 26.8503C115.864 26.5513 116.695 26.409 117.974 26.4063H119.302V27.8104Z" fill="#05BE50"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M22.3723 12C20.6063 12 19.1773 13.442 19.1773 15.2211V36H39.9267C41.6934 36 43.1255 34.5577 43.1255 32.7789L43.129 12H22.3723ZM37.5321 29.322L24.7676 31.6339V18.7226L37.5321 16.4103V29.322Z" fill="#0039A6"/>
+    </g>
+    <defs>
+      <clipPath id="joh-logo-clip-d">
+        <rect width="169" height="48" fill="white"/>
+      </clipPath>
+    </defs>
+  </svg>
+  </a>
+</nav>
 <div class="joh-card joh-card--visible" data-for="viaje">
   <img class="joh-card-icon" src="https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/f96a5a8e-3bb6-4d4e-9aa4-d5f0b8b959e5.png" alt="Cuenta" />
   <div class="joh-card-body">
@@ -809,7 +837,7 @@ alt="Hero background" />
               title: 'Rapidez',
               desc: 'Envía y recibe dinero en segundos desde donde estés y a toda hora',
               linkText: 'Prueba Plin Interbank',
-              linkHref: 'https://interbank.pe/plin-whatsapp',
+              linkHref: 'https://interbank.pe/plin-whatsapp?pcid=quiero:ser:cliente:dropdowncard:plin',
               icon: 'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/24ccd266-b9db-40d3-bd88-2696ce9a929b.png',
               image: BENEFITS_IMG_RAPIDEZ
           },
@@ -817,7 +845,7 @@ alt="Hero background" />
               title: 'Seguridad',
               desc: 'Bloquea tu tarjeta, protege tus datos y oculta tus saldos',
               linkText: 'Descubre Modo Calle',
-              linkHref: 'https://interbank.pe/',
+              linkHref: 'https://interbank.pe/modo-calle?pcid=quiero:ser:cliente:dropdowncard:calle',
               icon: 'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/93faaa8d-38b3-46be-8736-6f423fa221c1.png',
               image: BENEFITS_IMG_SEGURIDAD
           },
@@ -832,8 +860,8 @@ alt="Hero background" />
           {
               title: 'La Mejor Experiencia',
               desc: 'Atención humana en todo momento, siempre listos para lo que necesites',
-              linkText: 'Descubre Interbank APP',
-              linkHref: 'https://interbank.pe/',
+              linkText: '',
+              linkHref: '',
               icon: 'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/1f1f2383-4882-4cd3-a2b5-bb56600a26b3.png',
               image: BENEFITS_IMG_EXPERIENCIA
           }
@@ -847,46 +875,46 @@ alt="Hero background" />
               image: 'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/4b515640-9d93-4103-a2a9-1d4e879f6c92.png',
               imageAlt: 'Rawayana',
               badge: 'Conciertos',
-              title: '15% dscto para Maroon 5',
+              title: '15% dscto en conciertos',
               desc: 'Venta exclusiva con Tarjetas Interbank',
               btnText: 'Lo quiero',
-              btnHref: 'https://interbank.pe/'
+              btnHref: 'https://interbank.pe/promociones-catalogo/conciertos?pcid=quiero:ser:cliente:promocard:conciertos'
           },
           {
               image: 'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/fe3bbf4b-a2de-43a1-9d37-87cf6a7b5523.png',
-              imageAlt: 'Hiraoka',
+              imageAlt: 'Compras',
               badge: 'Compras',
-              title: 'Hiraoka',
-              desc: 'Gana 1 de los 5 Smart TV y premios',
+              title: 'Compra en cuotas',
+              desc: 'Grandes marcas con hasta 24 cuotas sin intereses ',
               btnText: 'Lo quiero',
-              btnHref: 'https://interbank.pe/'
+              btnHref: 'https://interbank.pe/promociones-catalogo/cuotas-sin-intereses/tarjeta-de-credito?pcid=quiero:ser:cliente:promocard:tc'
           },
           {
               image: 'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/03d328c2-8ba0-4461-860c-64bf1286ac0b.png',
               imageAlt: 'Restaurante',
-              badge: 'Experiencias',
-              title: 'Cineplanet',
-              desc: 'Hasta 50% dscto. con Tarjetas Interbank Amex',
+              badge: 'Restaurantes',
+              title: 'Disfruta ahorrando',
+              desc: 'Descuentos exclusivos para clientes Interbank',
               btnText: 'Lo quiero',
-              btnHref: 'https://interbank.pe/'
+              btnHref: 'https://interbank.pe/promociones-catalogo/restaurantes?pcid=quiero:ser:cliente:promocard:restaurantes'
           },
           {
               image: 'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/9e8a2d8a-5c12-4d58-b5e2-f085cabc552c.png',
               imageAlt: 'Cineplanet',
-              badge: 'Online',
-              title: 'Shopstar',
-              desc: 'Todos los miercoles hasta 20% dscto. adicional',
+              badge: 'Experiencias',
+              title: 'Cineplanet',
+              desc: 'Hasta 50% dscto. con Tarjetas Interbank Amex',
               btnText: 'Lo quiero',
-              btnHref: 'https://interbank.pe/'
+              btnHref: 'https://interbank.pe/promociones-catalogo/entretenimiento?pcid=quiero:ser:cliente:promocard:entretenimiento'
           },
           {
               image: 'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/8f39a8c0-79a5-4031-bc2e-f3978fead1a3.png',
               imageAlt: 'Shopstar',
-              badge: 'Compras',
-              title: 'Hiraoka',
-              desc: 'Gana 1 de los 5 Smart TV y premios',
+              badge: 'Online',
+              title: 'Shopstar',
+              desc: 'Todos los miercoles hasta 20% dscto. adicional',
               btnText: 'Lo quiero',
-              btnHref: 'https://interbank.pe/'
+              btnHref: 'https://www.shopstar.pe/?pcid=quiero:ser:cliente:promocard:shopstar'
           }
       ],
       ctaOutlineText: 'Ver beneficios cerca',
@@ -910,11 +938,11 @@ alt="Hero background" />
       phoneAlt: 'Interbank App en iPhone',
       qr: 'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/1e180b50-f1c6-4bb1-9f75-cb309d0795bf.png',
       qrAlt: 'Código QR Interbank App',
-      mockups: 'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/fb76a101-aee6-49af-a1a0-f4bf0823c666.png',
+      mockups: 'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/adddf543-9a6f-4ef7-99bb-4e02142f0641.png',
       mockupsAlt: 'Interbank App en smartphones',
       stores: [{
               name: 'Google Play',
-              href: 'https://play.google.com/store/apps/details?id=pe.com.interbank.mobilebanking',
+              href: 'https://interbankapp.onelink.me/YSdS/qf0sfdcw',
               image: 'https://interbank.pe/documents/20124/147356/pic-badge-android%402x.png/2104af8c-2e7c-3501-669c-f68fa2fafdc9?t=1636741002286'
           },
           {
@@ -1040,8 +1068,8 @@ alt="Hero background" />
       '.adc_section-promotions__carousel{background:#fff;margin:0 calc((100% - 100vw) / 2) 20px 0;overflow-x:auto;padding:4px 0 12px;width:calc(100% + (100vw - 100%) / 2);-ms-overflow-style:none;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}',
       '.adc_section-promotions__carousel::-webkit-scrollbar{display:none}',
       '.adc_section-promotions__track{display:flex;gap:20px;padding-right:48px;width:max-content}',
-      '.adc_promotion-card{border:1px solid #EEEFF1;box-shadow:0 5px 10px 0 #181A1D0A;flex:0 0 248px;max-width:248px;min-width:248px;width:248px;scroll-snap-align:start}',
-      '.adc_promotion-card__img{height:144px;object-fit:cover}',
+      '.adc_promotion-card{border:1px solid #EEEFF1;box-shadow:0 5px 10px 0 #181A1D0A;flex:0 0 250px;max-width:250px;min-width:250px;width:250px;scroll-snap-align:start}',
+      '.adc_promotion-card__img{height:154px;object-fit:cover}',
       '.adc_promotion-card__body{padding:18px}',
       '.adc_promotion-card__title{font-size:15px}',
       '.adc_promotion-card__desc{font-size:13px}',
@@ -1074,7 +1102,7 @@ alt="Hero background" />
       '@media (min-width:1200px){',
       '.adc_section-benefits{padding:56px 0}',
       '.adc_section-benefits__container{padding:0 10px}',
-      '.adc_section-promotions__container{padding: 0 0 0 20px}',
+      '.adc_section-promotions__container{padding: 0 0 0 40px}',
       '.adc_section-promotions__track{padding-right:64px}',
       '.adc_section-footer__container{max-width:1280px;padding:0 56px}',
       '.adc_section-footer__inner{gap:48px}',
@@ -1127,6 +1155,28 @@ alt="Hero background" />
           '</a>';
   }
 
+  function adcGetFooterDownloadHref() {
+      var ua = navigator.userAgent || navigator.vendor || window.opera || '';
+      var platform = navigator.platform || '';
+      var storeName = '';
+
+      if (/HUAWEI|HONOR|HarmonyOS/i.test(ua)) {
+          storeName = 'AppGallery';
+      } else if (/Android/i.test(ua)) {
+          storeName = 'Google Play';
+      } else if (/iPad|iPhone|iPod/i.test(ua) || (platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+          storeName = 'App Store';
+      }
+
+      for (var i = 0; i < footerConfig.stores.length; i++) {
+          if (footerConfig.stores[i].name === storeName) {
+              return footerConfig.stores[i].href;
+          }
+      }
+
+      return footerConfig.ctaHref;
+  }
+
   var htmlAdc =
       '<div class="adc_landing">' +
       '<section id="joh-benefits-anchor" class="adc_section adc_section-benefits">' +
@@ -1161,7 +1211,7 @@ alt="Hero background" />
       '<img class="adc_section-footer__logo" src="' + footerConfig.logo + '" alt="' + footerConfig.logoAlt + '" width="42" height="42" loading="lazy">' +
       '<p class="adc_section-footer__subtitle">' + footerConfig.subtitle + '</p>' +
       '<h2 class="adc_section-footer__title">' + footerConfig.title + '</h2>' +
-      '<a class="adc_section-footer__download" href="' + footerConfig.ctaHref + '" target="_blank" rel="noopener noreferrer">' +
+      '<a class="adc_section-footer__download" href="' + adcGetFooterDownloadHref() + '" target="_blank" rel="noopener noreferrer">' +
       footerConfig.ctaText +
       '<img class="adc_section-footer__download-icon" src="' + footerConfig.ctaIcon + '" alt="" loading="lazy">' +
       '</a>' +

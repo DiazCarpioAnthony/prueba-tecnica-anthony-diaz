@@ -5,18 +5,22 @@
     };
 
     var options = {
-        desktopImage: "https://content-us-2.content-cms.com/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/dxdam/6a/6a444082-e10d-4d95-8930-702c132f5504/img-hero_tipodecambio_jul_cashback_2_desktop_2x.png",
-        mobileImage: "https://content-us-2.content-cms.com/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/dxdam/c1/c187fe42-c1db-4fc5-8974-bd742bed9a9a/img-hero_tipodecambio_jul_cashback_2_mobile_2x.png",
+        desktopImage: "https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/e6e7df23-235b-4be5-af7e-7cd79e57fb9d.png",
+        mobileImage: "https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/3bbcd04c-1329-4877-a43d-f23f2edc8916.png",
         altImg: "Modo Turbo",
-        ratesImage: "https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/08f381ab-2338-48ec-8dc4-411cdf1ad871.png",
-        faqImage: "https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/08f381ab-2338-48ec-8dc4-411cdf1ad871.png",
+        ratesImage: "https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/5095aea6-bf84-4930-9f91-d36ebd95583d.png",
+        faqImage: "https://content-us-2.content-cms.com/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/dxdam/fe/fef2e115-7db2-4be3-8c47-941e5c1fe786/img_landing_mundial-visa-420x640_202601%202.png",
         benefits: [{
+            img: "https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/9fbffdb9-5057-4931-bd38-e746b6607d6b.png",
             description: "<strong>Haz rendir más tus ahorros</strong> desde el primer día con <strong>7% TREA.</strong>"
         }, {
+            img: "https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/77c4b6d4-8c58-47c7-a7b5-f8e3039ee65d.png",
             description: "Disfruta una tasa preferencial por <strong>hasta 6 meses.</strong>"
         }, {
+            img: "https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/d43901bc-4d28-4e46-bf7b-02388a89909f.png",
             description: "<strong>Obtén la tasa exclusiva</strong> por tus primeros S/5,000 ahorrados."
         }, {
+            img: "https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/00b45794-1026-4935-b791-86b5fffac653.png",
             description: "Abre tu <strong>Cuenta Simple 100% digital.</strong>"
         }],
         faqs: [{
@@ -56,8 +60,8 @@
         ".o-hero__slide{margin:0 auto;max-width:100%}",
         ".o-hero__slide img{height:auto;width:100%}",
         "@media (min-width:1024px){.o-hero__slide img{max-height:500px}}",
-        "@media (min-width:48em){#forminLayoutForm{top:-102px}}",
-        "@media (min-width:64em){#forminLayoutForm{top:-155px}}",
+        "@media (min-width:48em){#forminLayoutForm{top:-102px;margin-top:36px}}",
+        "@media (min-width:64em){#forminLayoutForm{top:-155px;margin-top:50px}}",
         "@media (min-width:48em){.o-hero.t-small.has-qr{padding-bottom:0!important}}",
         ".o-commitment>p.obs.obs-list{margin-left:3px}",
         ".xt-mt-rates{--p-text:#000;--adc-blue:#0039A6;--adc-blue-hover:#3361B8;--transition:all .2s ease;background:#fff;font-family:Poppins,sans-serif;padding:32px 0;position:relative;width:100%}",
@@ -65,7 +69,7 @@
         ".xt-mt-rates .adc_section-promotions__container{background:#fff;margin:0 auto;max-width:100%;padding:0 24px;position:relative;width:100%}",
         ".xt-mt-rates .adc_section-promotions__header{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}",
         ".xt-mt-rates .adc_section-promotions__title{color:var(--p-text);font-size:24px;font-weight:500;line-height:1.25;margin:0}",
-        ".xt-mt-rates .xt-mt-rates__img{border-radius:16px;display:block;height:auto;margin:0 auto 24px;max-width:100%;object-fit:contain;width:100%}",
+        ".xt-mt-rates .xt-mt-rates__img{aspect-ratio:640/770;border-radius:16px;display:block;height:auto;margin:0 auto 24px;max-width:640px;object-fit:contain;width:100%}",
         ".xt-mt-rates .adc_section-promotions__actions{display:flex;flex-direction:column;gap:12px;width:100%}",
         ".xt-mt-rates .adc_section-promotions__btn{align-items:center;border-radius:999px;cursor:pointer;display:inline-flex;font-size:16px;font-weight:500;gap:10px;justify-content:center;line-height:1;min-height:52px;padding:14px 24px;text-decoration:none;transition:var(--transition);width:100%}",
         ".xt-mt-rates .adc_section-promotions__btn--primary{background:var(--adc-blue);border:2px solid var(--adc-blue);color:#fff}",
@@ -76,7 +80,7 @@
         ".xt-mt-rates .adc_section-promotions__container{padding:0}",
         ".xt-mt-rates .adc_section-promotions__header{align-items:center;margin-bottom:32px;text-align:center}",
         ".xt-mt-rates .adc_section-promotions__title{font-size:24px;margin-left:auto;margin-right:auto;max-width:800px}",
-        ".xt-mt-rates .xt-mt-rates__img{margin-bottom:32px;max-width:928px}",
+        ".xt-mt-rates .xt-mt-rates__img{height:770px;margin-bottom:32px;max-width:640px;width:640px}",
         ".xt-mt-rates .adc_section-promotions__actions{align-items:center;margin:0 auto;max-width:none;width:auto}",
         ".xt-mt-rates .adc_section-promotions__btn{min-width:300px;padding:14px 48px;width:auto}",
         "}",
@@ -84,7 +88,7 @@
         ".xt-mt-faq *,.xt-mt-faq *:before,.xt-mt-faq *:after{box-sizing:border-box;font-family:Poppins,sans-serif}",
         ".xt-mt-faq__container{display:flex;flex-direction:column;gap:28px;margin:0 auto;max-width:1120px;padding:0 24px;width:100%}",
         ".xt-mt-faq__media{line-height:0;width:100%}",
-        ".xt-mt-faq__img{border-radius:16px;display:block;height:auto;object-fit:cover;width:100%}",
+        ".xt-mt-faq__img{display: none; border-radius:16px;height:auto;object-fit:cover;width:100%}",
         ".xt-mt-faq__content{display:flex;flex-direction:column;min-width:0;width:100%}",
         ".xt-mt-faq__title{color:var(--p-text);font-size:24px;font-weight:500;line-height:1.25;margin:0 0 8px}",
         ".xt-mt-faq__list{display:flex;flex-direction:column;width:100%}",
@@ -105,7 +109,7 @@
         ".xt-mt-faq{padding:48px 0 64px}",
         ".xt-mt-faq__container{align-items:stretch;flex-direction:row;gap:48px;padding:0 40px}",
         ".xt-mt-faq__media{flex:0 0 42%;max-width:460px}",
-        ".xt-mt-faq__img{height:100%;max-height:640px;object-fit:cover}",
+        ".xt-mt-faq__img{display: block; height:100%;max-height:640px;object-fit:cover}",
         ".xt-mt-faq__content{flex:1}",
         ".xt-mt-faq__title{font-size:28px;margin-bottom:12px}",
         ".xt-mt-faq__question{font-size:16px}",
@@ -201,8 +205,13 @@
         if (items.length === 0) return;
 
         for (var i = 0; i < items.length; i++) {
+            if (!options.benefits[i]) continue;
+            var img = items[i].querySelector(".m-card-benefits__items__item_img img");
             var description = items[i].querySelector(".m-card-benefits__items__item_description");
-            if (description && options.benefits[i]) {
+            if (img && options.benefits[i].img) {
+                img.src = options.benefits[i].img;
+            }
+            if (description) {
                 description.innerHTML = options.benefits[i].description;
             }
         }

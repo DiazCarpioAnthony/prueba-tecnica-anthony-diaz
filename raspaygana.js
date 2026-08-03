@@ -9,10 +9,8 @@
         document.head.appendChild(poppinsLink);
     }
 
-
   /* ========== Config ========== */
 
-  // Valor que va al campo "digital ID" (#digita) del iframe (se lee de cookies)
   var IFRAME_URL = 'https://interbank.pe/raspa-y-gana';
   var DEFAULT_DOC_TYPE = 'DNI';
   var DEFAULT_DNI = '77777777';
@@ -20,7 +18,6 @@
   var POLL_INTERVAL_MS = 200;
   var ALLOW_IFRAME_RELOAD_ONCE = true;
 
-  // Premios disponibles. premio_id va al campo "Premio" (#prem) del iframe.
   var PREMIOS = [
     {
       premio: 'Premio_TCEA',
@@ -48,7 +45,7 @@
     },
     {
       premio: 'Premio_CashBack',
-      title: '¡Ganaste 10% menos en tu tasa! 🥳',
+      title: '¡Ganaste 10% menos en tu tasa! 🎉',
       description: 'Disfruta una reducción del 10% en la TCEA de tu préstamo.',
       premio_id: 'premio_cashback',
       image:
@@ -57,7 +54,7 @@
     {
       premio: 'Premio_Millas',
       title: '¡Ganaste 1,000 millas Benefit! 🎉',
-      description: 'Tus próximas aventuras empiezan aquí. Las millas ya son tuyas.',
+      description: 'Tus próximas aventuras empiezan aquí­. Las millas ya son tuyas.',
       premio_id: 'premio_millas',
       image:
         'https://content-us-1.static.content-cms.com/s3/9b3f67ef-5a9f-4acc-8ce8-bcc27fa681c7/533501ef-ab7f-400a-b6e3-1b9ee6ac1081.png'
@@ -99,9 +96,9 @@
     fadeDuration: 650,
     autoOpen: false,
     ctaText: 'Entendido',
-    // Texto del botón bajo el cual va el banner (ej: "Ver constancia")
-    anchorButtonText: 'Quiero ser cliente',
-    anchorSelector: '.adc_section-promotions__btn',
+    // Texto del bloque bajo el cual va el banner (caja info Extracash)
+    anchorText: 'Enviaremos en los próximos días a tu correo',
+    anchorSelector: 'div, section, article, aside, p',
     bannerTitle: '¡Raspa y descubre cuál es tu premio!',
     bannerCtaText: 'Empezar',
     bannerIcon:
@@ -182,7 +179,7 @@
   }
 
   function normalizeDni(raw) {
-    var dni = (raw == null ? '' : String(raw)).trim().replace(/\D/g, '');
+    var dni = (raw == null ? '' : String(raw)).trim().replace(/D/g, '');
     if (!dni) dni = DEFAULT_DNI;
     if (dni.length < 8) dni = ('00000000' + dni).slice(-8);
     if (dni.length > 8) dni = dni.slice(0, 8);
@@ -305,12 +302,11 @@
     return iframe;
   }
 
-  // Rellena y envía el form del iframe (estilo iframeSend.js)
   function enviarPremioIframe(premio) {
     var iframe = ensureIframe();
     var resolved = resolveDigitalId();
 
-    // digInput: self.digital_id || ""  (NO TOCAR) — igual que iframeSend.js
+    // digInput: self.digital_id || ""  (NO TOCAR) 
     var datos = {
       tipoDocumento: DEFAULT_DOC_TYPE,
       nroDocumento: normalizeDni(DEFAULT_DNI),
@@ -398,31 +394,63 @@
     }
   }
 
-  // Busca un botón/enlace por su texto
-  function findButtonByText(buttonText) {
-    var target = String(buttonText || '')
+  // Normaliza texto para comparar (espacios, mayúsculas y tildes)
+  function normalizeText(value) {
+    var text = String(value || '')
       .replace(/\s+/g, ' ')
       .replace(/^\s+|\s+$/g, '')
       .toLowerCase();
-    var nodes = document.querySelectorAll(config.anchorSelector || 'a, button');
+
+    if (typeof text.normalize === 'function') {
+      text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+
+    return text;
+  }
+
+  // Busca el contenedor más específico que contiene el texto ancla
+  function findAnchorByText(searchText) {
+    var target = normalizeText(searchText);
+    var nodes = document.querySelectorAll(config.anchorSelector || 'div, section, article, aside, p');
     var match = null;
+    var matchLen = Infinity;
     var i;
     var text;
+    var parent;
 
     if (!target) {
       return null;
     }
 
     for (i = 0; i < nodes.length; i += 1) {
-      text = String(nodes[i].textContent || '')
-        .replace(/\s+/g, ' ')
-        .replace(/^\s+|\s+$/g, '')
-        .toLowerCase();
-      if (text === target || text.indexOf(target) !== -1) {
+      text = normalizeText(nodes[i].textContent);
+      if (text.indexOf(target) === -1) {
+        continue;
+      }
+      if (text.length < matchLen) {
         match = nodes[i];
-        if (text === target) {
-          break;
-        }
+        matchLen = text.length;
+      }
+    }
+
+    if (!match) {
+      return null;
+    }
+
+    // Sube al contenedor del bloque (caja celeste) sin salir al layout general
+    parent = match.parentElement;
+    while (parent && parent !== document.body && parent !== document.documentElement) {
+      text = normalizeText(parent.textContent);
+      if (
+        text.indexOf(target) !== -1 &&
+        text.length <= matchLen + 80 &&
+        parent.children.length <= 4
+      ) {
+        match = parent;
+        matchLen = text.length;
+        parent = match.parentElement;
+      } else {
+        break;
       }
     }
 
@@ -455,7 +483,7 @@
     ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
   }
 
-  // Borra un área del canvas con el brush (efecto raspar)
+  // Borra un Área del canvas con el brush (efecto raspar)
   function stampOnContext(ctx, brush, x, y, offsetX, offsetY, angle, scale, alpha) {
     var half = brush.size / 2;
 
@@ -491,8 +519,8 @@
       root + ' .ab-raspa-card__base{display:flex;align-items:flex-end;justify-content:center;background-color:#1a1a1a;overflow:hidden;padding-bottom:20px}',
       root + ' .ab-raspa-card__img{position:absolute;top:0;right:0;bottom:0;left:0;display:block;width:100%;height:100%;object-fit:cover}',
       root + ' .ab-raspa-card__prize{position:relative;z-index:1;width:266px;padding:12px 14px;border-radius:16px;background:var(--raspa-prize-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,.18)}',
-      root + ' .ab-raspa-card__prize-title{color:#17013b;font-size:18px;font-weight:600;line-height:1.2;margin-bottom:4px}',
-      root + ' .ab-raspa-card__prize-desc{color:#17013b;font-size:12px;font-weight:400;line-height:1.3}',
+      root + ' .ab-raspa-card__prize-title{color:#005F1E;font-size:18px;font-weight:600;line-height:1.2;margin-bottom:4px}',
+      root + ' .ab-raspa-card__prize-desc{color:#005F1E;font-size:12px;font-weight:400;line-height:1.3}',
       root + ' .ab-raspa-card__canvas{cursor:grabbing;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;touch-action:none;transition:opacity .65s ease;z-index:2}',
       root + ' .ab-raspa-confetti{position:absolute;top:0;right:0;bottom:0;left:0;pointer-events:none;z-index:3}',
       root + ' .ab-raspa-confetti .a-confetti-animation{margin:0;width:100%;height:100%}',
@@ -540,8 +568,6 @@
   }
 
   /* ========== Confetti ========== */
-
-  // Prepara recursos de HALCON para cargar Lottie/confeti
   function setupHalconScripts() {
     var vault;
 
@@ -756,7 +782,7 @@
 
   /* ========== Scratch card ========== */
 
-  // Ajusta el tamaño interno del canvas al tamaño visible
+  // Ajusta el tamaño interno del canvas al tamaaño visible
   function syncCanvasSize(canvas) {
     var rect = canvas.getBoundingClientRect();
     var width = Math.max(1, Math.round(rect.width));
@@ -824,7 +850,7 @@
       mouseY = (clientY - rect.top) * (canvas.height / rect.height);
     }
 
-    // Indica si el puntero está dentro del canvas
+    // Indica si el puntero esta dentro del canvas
     function isInside() {
       return mouseX >= 0 && mouseY >= 0 && mouseX <= canvas.width && mouseY <= canvas.height;
     }
@@ -887,7 +913,7 @@
       stampOnContext(trackContext, brush, x, y, offsetX, offsetY, angle, scale, alpha);
     }
 
-    // Raspa en línea continua entre dos puntos
+    // Raspa en li­nea continua entre dos puntos
     function scratchLine(x0, y0, x1, y1) {
       var dx = x1 - x0;
       var dy = y1 - y0;
@@ -927,7 +953,7 @@
       }
     }
 
-    // Continúa el raspe mientras se arrastra el mouse
+    // Continua el raspe mientras se arrastra el mouse
     function onMouseMove(event) {
       if (isDragging) {
         scratchAtPointer(event, false);
@@ -1029,7 +1055,7 @@
     });
   }
 
-  // Inserta el banner debajo del botón y abre el popup con Empezar
+  // Inserta el banner debajo de la caja info y abre el popup con Empezar
   function mountBanner() {
     var anchor;
     var startBtn;
@@ -1040,7 +1066,7 @@
         return;
       }
 
-      anchor = findButtonByText(config.anchorButtonText);
+      anchor = findAnchorByText(config.anchorText);
       if (!anchor) {
         tries += 1;
         if (tries < 20) {

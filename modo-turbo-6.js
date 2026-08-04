@@ -90,7 +90,7 @@
         "}",
         ".xt-mt-faq{--p-text:#181A1D;--p-gray:#494E56;--p-green:#00A938;--p-border:#E5E7EA;background:#fff;font-family:Poppins,sans-serif;padding:32px 0;width:100%}",
         ".xt-mt-faq *,.xt-mt-faq *:before,.xt-mt-faq *:after{box-sizing:border-box;font-family:Poppins,sans-serif}",
-        ".xt-mt-faq__container{display:flex;flex-direction:column;gap:28px;margin:0 auto;max-width:1120px;padding:0 24px;width:100%}",
+        ".xt-mt-faq__container{display:flex;flex-direction:column;margin:0 auto;max-width:1120px;padding:0 24px;width:100%}",
         ".xt-mt-faq__title{color:#0F191E;font-family:Geometria,sans-serif;font-size:24px;font-weight:500;letter-spacing:-0.4px;line-height:24px;margin:0;text-align:center}",
         ".xt-mt-faq__body{display:flex;flex-direction:column;gap:28px;width:100%}",
         ".xt-mt-faq__media{line-height:0;width:100%}",

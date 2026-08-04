@@ -96,9 +96,9 @@
     fadeDuration: 650,
     autoOpen: false,
     ctaText: 'Entendido',
-    // Texto del bloque bajo el cual va el banner (caja info Extracash)
-    anchorText: 'Enviaremos en los próximos días a tu correo',
-    anchorSelector: 'div, section, article, aside, p',
+    // Texto del botón bajo el cual va el banner (ej: "Ver constancia")
+    anchorButtonText: 'Sigamos',
+    anchorSelector: '',
     bannerTitle: '¡Raspa y descubre cuál es tu premio!',
     bannerCtaText: 'Empezar',
     bannerIcon:
@@ -394,63 +394,31 @@
     }
   }
 
-  // Normaliza texto para comparar (espacios, mayúsculas y tildes)
-  function normalizeText(value) {
-    var text = String(value || '')
-      .replace(/\s+/g, ' ')
-      .replace(/^\s+|\s+$/g, '')
+  // Busca un botón/enlace por su texto
+  function findButtonByText(buttonText) {
+    var target = String(buttonText || '')
+      .replace(/s+/g, ' ')
+      .replace(/^s+|s+$/g, '')
       .toLowerCase();
-
-    if (typeof text.normalize === 'function') {
-      text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    }
-
-    return text;
-  }
-
-  // Busca el contenedor más específico que contiene el texto ancla
-  function findAnchorByText(searchText) {
-    var target = normalizeText(searchText);
-    var nodes = document.querySelectorAll(config.anchorSelector || 'div, section, article, aside, p');
+    var nodes = document.querySelectorAll(config.anchorSelector || 'a, button');
     var match = null;
-    var matchLen = Infinity;
     var i;
     var text;
-    var parent;
 
     if (!target) {
       return null;
     }
 
     for (i = 0; i < nodes.length; i += 1) {
-      text = normalizeText(nodes[i].textContent);
-      if (text.indexOf(target) === -1) {
-        continue;
-      }
-      if (text.length < matchLen) {
+      text = String(nodes[i].textContent || '')
+        .replace(/s+/g, ' ')
+        .replace(/^s+|s+$/g, '')
+        .toLowerCase();
+      if (text === target || text.indexOf(target) !== -1) {
         match = nodes[i];
-        matchLen = text.length;
-      }
-    }
-
-    if (!match) {
-      return null;
-    }
-
-    // Sube al contenedor del bloque (caja celeste) sin salir al layout general
-    parent = match.parentElement;
-    while (parent && parent !== document.body && parent !== document.documentElement) {
-      text = normalizeText(parent.textContent);
-      if (
-        text.indexOf(target) !== -1 &&
-        text.length <= matchLen + 80 &&
-        parent.children.length <= 4
-      ) {
-        match = parent;
-        matchLen = text.length;
-        parent = match.parentElement;
-      } else {
-        break;
+        if (text === target) {
+          break;
+        }
       }
     }
 
@@ -1055,9 +1023,10 @@
     });
   }
 
-  // Inserta el banner debajo de la caja info y abre el popup con Empezar
+  // Inserta el banner debajo del botón y abre el popup con Empezar
   function mountBanner() {
     var anchor;
+    var parentDiv;
     var startBtn;
     var tries = 0;
 
@@ -1066,13 +1035,19 @@
         return;
       }
 
-      anchor = findAnchorByText(config.anchorText);
+      anchor = findButtonByText(config.anchorButtonText);
       if (!anchor) {
         tries += 1;
         if (tries < 20) {
           setTimeout(tryMount, 500);
         }
         return;
+      }
+      
+      parentDiv = anchor.parentNode;
+       console.log(parentDiv, "parentDiv")
+      if(parentDiv){
+        parentDiv.style.flexDirection = "column";
       }
 
       anchor.insertAdjacentHTML(
